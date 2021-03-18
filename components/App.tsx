@@ -21,7 +21,7 @@ const App = () => {
   } else {
     return (
     <View style={styles.container}>
-      <Header text={styles.text}/>
+      <Header text={styles.text} />
       <ModelPanel text={styles.text} />
       <Mode text={styles.text} />
       <Power text={styles.text} />

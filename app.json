@@ -2,8 +2,8 @@
   "name": "reactNative",
   "displayName": "reactNative",
   "expo": {
-    "name": "reactNative",
-    "slug": "reactNative",
+    "name": "vacuum",
+    "slug": "vacuum",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

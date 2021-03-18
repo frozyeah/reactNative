@@ -18,7 +18,7 @@ const Header = (props: any) => {
           </View>
         </View>
         <View style={styles.right}>
-          <BatteryButton />
+          <BatteryButton text={props.text}/>
           <SettingsButton />
         </View>
       </View>
