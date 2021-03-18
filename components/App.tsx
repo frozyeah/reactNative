@@ -21,12 +21,12 @@ const App = () => {
   } else {
     return (
     <View style={styles.container}>
-      <Header />
+      <Header text={styles.text}/>
       <ModelPanel text={styles.text} />
-      <Mode />
-      <Power />
-      <Map />
-      <Planner />
+      <Mode text={styles.text} />
+      <Power text={styles.text} />
+      <Map text={styles.text} />
+      <Planner text={styles.text} />
     </View>
   );
 }
