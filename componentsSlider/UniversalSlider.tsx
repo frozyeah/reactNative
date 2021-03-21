@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     View,
     Text,
@@ -103,7 +103,6 @@ const UniversalSlider = (props: USliderProps) => {
 
     const _fetchNewValueFromGesture = (gestureState: any): number => {
         const { min, max, step, height = 200 } = props;
-        console.log(gestureState);
         const ratio = -gestureState.dy / height;
         const diff = max - min;
         if (step) {
@@ -202,6 +201,12 @@ const UniversalSlider = (props: USliderProps) => {
             }
         },
     }), []);
+
+    useEffect(()=>{
+      if (value) {
+        _changeState(value);
+      }
+    },[])
 
     return(
     <View

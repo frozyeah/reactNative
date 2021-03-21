@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
+import RechargeIcon from "./RechargeIcon";
 
 const BatteryButton = (props: any) => {
     const [modalVisible, setVisible] = useState(false);
@@ -13,9 +14,9 @@ const BatteryButton = (props: any) => {
             transparent={true}
             visible={modalVisible}>
                 <View style={{backgroundColor:"rgba(38,38,38,0.6)", width:"100%", height:"100%", alignSelf:"center"}}>
-                    <View style={{height:"48.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20}}>
+                    <View style={{height:"48.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, alignItems:"center", justifyContent:"space-around"}}>
                         <View style={styles.header}>
-                            <Image source={require("../../assets/img/low-battery.png")} style={{height: 200}} />
+                            <Image source={require("../../assets/img/low-battery.png")} style={{height: "32.5%", width:"8.5%"}} />
                             <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center"}]}>Уровень заряда</Text>
                             <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                                 <View style={styles.close}>
@@ -23,7 +24,7 @@ const BatteryButton = (props: any) => {
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", alignContent:"center"}}>
+                        <View style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", justifyContent:"center"}}>
                             <Text style={[props.text, {color:"white", fontSize:87.84, alignSelf:"center"}]}>
                                 33%
                             </Text>
@@ -31,10 +32,9 @@ const BatteryButton = (props: any) => {
                         <Text style={[props.text, {color:"white", fontSize:15.86, alignSelf:"center"}]}>
                             Заряда хватит на 1 час и 27 минут
                         </Text>
-                        <TouchableOpacity activeOpacity={0.7}>
-                            <View style={styles.button}>
-                                <Text style={[props.text, {color: "#fff", fontSize: 14.64, alignSelf:"center"}]}>Recharge</Text>
-                            </View>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.recharge}>
+                            <RechargeIcon />
+                            <Text style={[props.text, {color: "#fff", fontSize: 14.64, alignSelf:"center"}]}>Recharge</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -62,10 +62,15 @@ const styles = StyleSheet.create({
     recharge:{
         // marginTop:"14.5%",
         alignItems: "center",
+        justifyContent:"center",
         backgroundColor:"#59A1F6",
-        borderRadius: 10
+        borderRadius: 10,
+        height: "14.9%",
+        width: "27.15%"
     },
     close: {
+        justifyContent:"center",
+        alignItems:"center",
         marginTop:"5%",
         backgroundColor: "#000",
         height: 55,
@@ -73,7 +78,9 @@ const styles = StyleSheet.create({
         borderRadius: 27.5,
     },
     header:{
-        flexDirection:"row"
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center"
     }
 });
 

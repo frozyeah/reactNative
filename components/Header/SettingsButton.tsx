@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
-const SettingsButton = () => {
+const SettingsButton = (props: any) => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={styles.container}>
             <View style={styles.button}>
