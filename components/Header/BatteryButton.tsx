@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
-import RechargeIcon from "./RechargeIcon";
+import RechargeIcon from "../../assets/svg/recharge.svg";
+import Svg, { Path } from "react-native-svg"
 
 const BatteryButton = (props: any) => {
     const [modalVisible, setVisible] = useState(false);
@@ -14,21 +15,33 @@ const BatteryButton = (props: any) => {
             transparent={true}
             visible={modalVisible}>
                 <View style={{backgroundColor:"rgba(38,38,38,0.6)", width:"100%", height:"100%", alignSelf:"center"}}>
-                    <View style={{height:"48.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, alignItems:"center", justifyContent:"space-around"}}>
+                    <View style={{height:"55.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent:"space-around"}}>
                         <View style={styles.header}>
-                            <Image source={require("../../assets/img/low-battery.png")} style={{height: "32.5%", width:"8.5%"}} />
-                            <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center"}]}>Уровень заряда</Text>
+                            <View style={{flexDirection:"row"}}>
+                            <Image source={require("../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
+                            <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>Уровень заряда</Text>
+                            </View>
                             <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                                 <View style={styles.close}>
-                                    <Text style={[props.text, {color:"#FFF", fontSize: 50}]}>x</Text>
+                                <Svg
+                                width={17}
+                                height={17}
+                                viewBox="0 0 13 13"
+                                fill="none"
+                                >
+                                    <Path
+                                    d="M7.262 6.503L12.835.931a.541.541 0 10-.766-.766L6.497 5.738.924.165a.541.541 0 00-.765.766L5.73 6.503.16 12.076a.541.541 0 00.765.765L6.497 7.27l5.572 5.572a.541.541 0 00.766-.765L7.262 6.503z"
+                                    fill="#fff"
+                                    />
+                                </Svg>
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", justifyContent:"center"}}>
+                        <TouchableOpacity activeOpacity={0.7} style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", justifyContent:"center"}}>
                             <Text style={[props.text, {color:"white", fontSize:87.84, alignSelf:"center"}]}>
                                 33%
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                         <Text style={[props.text, {color:"white", fontSize:15.86, alignSelf:"center"}]}>
                             Заряда хватит на 1 час и 27 минут
                         </Text>
@@ -60,8 +73,10 @@ const styles = StyleSheet.create({
         borderRadius: 27.5,
     },
     recharge:{
+        marginBottom: "2%",
         // marginTop:"14.5%",
         alignItems: "center",
+        alignSelf: "center",
         justifyContent:"center",
         backgroundColor:"#59A1F6",
         borderRadius: 10,
@@ -72,15 +87,15 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems:"center",
         marginTop:"5%",
-        backgroundColor: "#000",
+        // backgroundColor: "#000",
         height: 55,
         width: 55,
         borderRadius: 27.5,
     },
     header:{
+        justifyContent:"space-around",
         flexDirection:"row",
         alignItems:"center",
-        justifyContent:"center"
     }
 });
 

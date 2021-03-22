@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
-import PlannerMode from "./PlannerIcon"
+import PlannerMode from "../../assets/svg/planner.svg";
 
 const Planner = (props: any) => {
     return (
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
       marginLeft: "5%",
       marginTop: "6%",
       flexDirection: "row",
+      alignItems: "center"
     },
     text: {
       marginLeft: "2%",

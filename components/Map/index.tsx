@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import MapIcon from "./MapIcon";
+import MapIcon from "../../assets/svg/map.svg";
 
 const Map = (props: any) => {
     return (
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
       marginLeft: "5%",
       marginTop: "6%",
       flexDirection: "row",
+      alignItems: "center"
     },
     text: {
       marginLeft: "2%",

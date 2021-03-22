@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import ModelIcon from "./ModelIcon";
+import PowerButton from "../../assets/svg/start.svg";
 
 const ModelPanel = (props: any) => {
   return (
@@ -14,7 +14,7 @@ const ModelPanel = (props: any) => {
         </Text>
         <TouchableOpacity activeOpacity={0.7}>
           <View style={styles.button}>
-            <ModelIcon />
+            <PowerButton />
             <Text style={[props.text, {color: "#fff", fontSize: 15.86, marginTop:"5%", marginBottom:"5%"}]}>Начать уборку</Text>
           </View>
         </TouchableOpacity>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   cleaner:{
     position:"absolute",
-    left:"57%",
+    left:"56.5%",
     top:"7.5%"
   },
   button:{

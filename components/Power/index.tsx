@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import PowerIcon from "./PowerIcon";
+import PowerIcon from "../../assets/svg/power.svg";
 
 const Power = (props: any) => {
     return (
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
       marginLeft: "5%",
       marginTop: "6%",
       flexDirection: "row",
-      alignItems: "flex-end"
+      alignItems: "center"
     },
     text: {
       marginLeft: "2%",
