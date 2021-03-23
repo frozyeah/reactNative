@@ -8,15 +8,15 @@ import Mode from './Mode';
 import Power from './Power';
 import Map from './Map';
 import Planner from './Planner';
-import Options from './Options';
+import Settings from './Settings';
 import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
 
-const MainScreen = () => {
+const MainScreen = ({navigation}:any) => {
   return(
     <View style={styles.container}>
-      <Header text={styles.text} />
+      <Header text={styles.text} nav={navigation} />
       <ModelPanel text={styles.text} />
       <Mode text={styles.text} />
       <Power text={styles.text} />
@@ -39,12 +39,12 @@ const App = () => {
   } else {
     return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
           name="MainScreen"
           component={MainScreen}
       />
-      <Stack.Screen name="Options" component={Options} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
     </NavigationContainer>
   );
