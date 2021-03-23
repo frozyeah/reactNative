@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   button:{
     marginTop:"14.5%",
     alignItems: "center",
-    backgroundColor:"#59A1F6",
+    justifyContent: "center",
+    backgroundColor: "#59A1F6",
     borderRadius: 10
   },
   rect:{

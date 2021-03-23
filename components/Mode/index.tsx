@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import ModeIcon from "../../assets/svg/mode.svg";
 import Auto from "../../assets/svg/auto.svg";
 import Edge from "../../assets/svg/edge.svg";
@@ -18,35 +18,35 @@ const Mode = (props: any) => {
         </View>
         <View style={styles.radioContainer}>
 
-          <View style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
+          <TouchableOpacity activeOpacity={0.7} style={[styles.radio, {backgroundColor: "#3F8EEC"}]}>
             <Auto fill="red" />
-            <Text>
+            <Text style={[props.text, {color:"white"}]}>
               Auto
             </Text>
-          </View>
+          </TouchableOpacity>
 
 
-          <View style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
+          <TouchableOpacity activeOpacity={0.7} style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
             <Edge fill={"red"} />
-            <Text>
+            <Text style={[props.text, {color:"#418FED"}]}>
               Edge
             </Text>
-          </View>
+          </TouchableOpacity>
 
 
-          <View style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
+          <TouchableOpacity activeOpacity={0.7} style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
             <Spot />
-            <Text>
+            <Text style={[props.text, {color:"#418FED"}]}>
               Spot
             </Text>
-          </View>
+          </TouchableOpacity>
 
-          <View style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
+          <TouchableOpacity activeOpacity={0.7} style={[styles.radio, {backgroundColor: "#4F4F4F"}]}>
             <Random />
-            <Text>
+            <Text style={[props.text, {color:"#418FED"}]}>
               Random
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -60,27 +60,33 @@ const styles = StyleSheet.create({
       backgroundColor:"#252525",
       flex: 2,
       borderRadius: 20,
+      justifyContent: "space-between"
     },
     head:{
       marginLeft: "5%",
-      marginTop: "6%",
+      marginTop: "4.7%",
       flexDirection: "row",
       alignItems: "center"
     },
     radioContainer:{
       flexDirection: "row",
-      justifyContent: "space-around"
+      justifyContent: "space-around",
+      paddingBottom: "2%"
     },
     radio:{
       alignItems:"center",
+      justifyContent: "center",
       borderRadius: 10,
-      width:"22%",
-      height:"100%"
+      width:65,
+      height:65
     },    
     text: {
       marginLeft: "2%",
       color: "white",
       fontSize:21.96
+    },
+    buttonText: {
+      color: "white"
     }
 });
 

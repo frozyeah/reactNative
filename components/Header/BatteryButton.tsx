@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
 import RechargeIcon from "../../assets/svg/recharge.svg";
-import Svg, { Path } from "react-native-svg"
+import Close from "../../assets/svg/close.svg";
 
 const BatteryButton = (props: any) => {
     const [modalVisible, setVisible] = useState(false);
@@ -18,27 +18,17 @@ const BatteryButton = (props: any) => {
                     <View style={{height:"55.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent:"space-around"}}>
                         <View style={styles.header}>
                             <View style={{flexDirection:"row"}}>
-                            <Image source={require("../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
-                            <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>Уровень заряда</Text>
+                                <Image source={require("../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
+                                <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>Уровень заряда</Text>
                             </View>
                             <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                                 <View style={styles.close}>
-                                <Svg
-                                width={17}
-                                height={17}
-                                viewBox="0 0 13 13"
-                                fill="none"
-                                >
-                                    <Path
-                                    d="M7.262 6.503L12.835.931a.541.541 0 10-.766-.766L6.497 5.738.924.165a.541.541 0 00-.765.766L5.73 6.503.16 12.076a.541.541 0 00.765.765L6.497 7.27l5.572 5.572a.541.541 0 00.766-.765L7.262 6.503z"
-                                    fill="#fff"
-                                    />
-                                </Svg>
+                                    <Close width={17} height={17} />
                                 </View>
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity activeOpacity={0.7} style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", justifyContent:"center"}}>
-                            <Text style={[props.text, {color:"white", fontSize:87.84, alignSelf:"center"}]}>
+                            <Text style={[props.text, {color:"white", fontSize:80.84, alignSelf:"center"}]}>
                                 33%
                             </Text>
                         </TouchableOpacity>
