@@ -6,7 +6,7 @@ const SettingsButton = (props: any) => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={styles.container} onPressOut={() => props.nav.navigate('Settings')}>
             <View style={styles.button}>
-                <Image source={require("../../assets/img/settings.png")} style={{marginTop: "25%",height:"50%", width:"50%", alignSelf:"center"}} />
+                <Image source={require("../../../assets/img/settings.png")} style={{marginTop: "25%",height:"50%", width:"50%", alignSelf:"center"}} />
             </View>
         </TouchableOpacity>
     );

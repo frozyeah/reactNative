@@ -9,5 +9,5 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "include": ["components/", "svg.d.ts"]
+  "include": ["src", "svg.d.ts"]
 }

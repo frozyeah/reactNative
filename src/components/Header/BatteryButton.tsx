@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
-import RechargeIcon from "../../assets/svg/recharge.svg";
-import Close from "../../assets/svg/close.svg";
+import RechargeIcon from "../../../assets/svg/recharge.svg";
+import Close from "../../../assets/svg/close.svg";
 
 const BatteryButton = (props: any) => {
     const [modalVisible, setVisible] = useState(false);
@@ -18,7 +18,7 @@ const BatteryButton = (props: any) => {
                     <View style={{height:"55.8%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent:"space-around"}}>
                         <View style={styles.header}>
                             <View style={{flexDirection:"row"}}>
-                                <Image source={require("../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
+                                <Image source={require("../../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
                                 <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>Уровень заряда</Text>
                             </View>
                             <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
@@ -45,7 +45,7 @@ const BatteryButton = (props: any) => {
 
 
             <View style={styles.button}>
-                <Image source={require("../../assets/img/low-battery.png")} style={{marginTop: "25%", height:"50%", width:"50%", alignSelf:"center"}} />
+                <Image source={require("../../../assets/img/low-battery.png")} style={{marginTop: "25%", height:"50%", width:"50%", alignSelf:"center"}} />
             </View>
 
         </TouchableOpacity>
