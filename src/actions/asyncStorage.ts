@@ -6,16 +6,16 @@ export const storeData = async (value: string) => {
     } catch (e) {
       // saving error
     }
-  }
+}
   
 export const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@theme');
-      if(value !== null) {
-        return (value === 'true');
-      }
-      return true
-    } catch(e) {
-      return true;
+  try {
+    const value = await AsyncStorage.getItem('@theme');
+    if(value !== null) {
+      return (value === 'true');
     }
+    return true
+  } catch(e) {
+    return true;
   }
+}

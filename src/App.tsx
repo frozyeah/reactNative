@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
+import ThemeManager, { useTheme } from './themes';
+
 import Header from './components/Header';
 import ModelPanel from './components/ModelPanel';
 import Mode from './components/Mode';
@@ -9,58 +12,73 @@ import Power from './components/Power';
 import Map from './components/Map';
 import Planner from './components/Planner';
 import Settings from './components/Settings';
-import { useFonts } from 'expo-font';
+
+import Info from "./components/Settings/Items/Info"
+import ManageVacuum from "./components/Settings/Items/ManageVacuum"
+import Reset from "./components/Settings/Items/Reset"
+import Update from "./components/Settings/Items/Update"
+
 
 const Stack = createStackNavigator();
 
-const MainScreen = ({navigation}:any) => {
+const MainScreen = ({navigation}: any, theme: any) => {
+  console.log(theme, styles.container);
   return(
-    <View style={styles.container}>
+    <View style={[styles.container, theme.homeContainer]}>
       <Header text={styles.text} nav={navigation} />
       <ModelPanel text={styles.text} />
       <Mode text={styles.text} />
       <Power text={styles.text} />
       <Map text={styles.text} />
       <Planner text={styles.text} />
-    </View>
+    </View> 
   )
 }
 
 const App = () => {
+  const {theme, isDark} = useTheme();
   let [fontsLoaded] = useFonts({
-    'Gilroy-Bold': require('../assets/fonts/Gilroy-Light.ttf'),
+    'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
   });
+  useEffect(()=>{
+    console.log(theme);
+  },[theme])
   if(!fontsLoaded){
     return(
-    <View style={[styles.container, styles.loader]}>
+    <View style={[styles.container, theme.homeContainer, styles.loader]}>
       <ActivityIndicator size="large" color="#fff" />
     </View>
     );
   } else {
     return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen
-          name="MainScreen"
-          component={MainScreen}
-      />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeManager>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen
+          name="MainScreen">{(props:any) => <MainScreen theme={theme} {...props} />}</Stack.Screen>
+          <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Info" component={Info} />
+          <Stack.Screen name="ManageVacuum" component={ManageVacuum} />
+          <Stack.Screen name="Reset" component={Reset} />
+          <Stack.Screen name="Update" component={Update} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeManager>
   );
 }
+
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:"#000000",
     flex: 1,
+    backgroundColor:"black"
   },
   loader: {
     flex: 1,
     justifyContent: "center"
   },
   text: {
-    fontFamily: "Gilroy-Bold"
+    fontFamily: "Gilroy-Light"
   }
 });
 

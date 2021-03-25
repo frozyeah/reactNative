@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, StatusBar } from 'react-native';
 import Home from "../../../assets/svg/home.svg";
-import Edit from "../../../assets/svg/pen.svg";
+import Back from "../../../assets/svg/left-arrow.svg";
 
-const MainHeader = (props: any) => {
+const SubHeader = (props: any) => {
     return (
         <View style={styles.container}>
             <View style={styles.left}>
-                <TouchableOpacity activeOpacity={0.7}>
-                    <View style={styles.avatar}>
-                        <Image source={require("../../../assets/img/avatar.png")} style={{height:"100%", width:"100%", alignSelf:"center"}} />
-                    </View>
-                </TouchableOpacity>
-                <View style={styles.text}>
-                    <Text style={[{fontSize: 16.86, color:"#fff"}, props.text]}>Nick Korzh</Text>
-                </View>
-                <TouchableOpacity activeOpacity={0.7}>
-                    <View style={styles.edit}>
-                        <Edit style={{height:"100%", width:"100%", alignSelf:"center"}} />
+                <TouchableOpacity activeOpacity={0.7} onPressOut={() => props.nav.navigate('Settings')}>
+                    <View style={styles.back}>
+                        <Back height={24} width={24} style={{height:"100%", width:"100%", alignSelf:"center"}} />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -39,11 +31,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
-    avatar: {
+    back: {
         backgroundColor: "#212121",
         height: 55,
         width: 55,
         borderRadius: 27.5,
+        justifyContent: "center"
     },
     edit: {
         backgroundColor: "#212121",
@@ -79,4 +72,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MainHeader;
+export default SubHeader;

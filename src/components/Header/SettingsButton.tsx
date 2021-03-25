@@ -14,7 +14,7 @@ const SettingsButton = (props: any) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: "4%"
+        // marginLeft: "2.5%"
     },
     button: {
         backgroundColor: "#212121",

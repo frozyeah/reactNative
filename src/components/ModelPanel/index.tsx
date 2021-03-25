@@ -14,7 +14,7 @@ const ModelPanel = (props: any) => {
         </Text>
         <TouchableOpacity activeOpacity={0.7}>
           <View style={styles.button}>
-            <PowerButton />
+            <PowerButton style={{marginTop:"5%"}}/>
             <Text style={[props.text, {color: "#fff", fontSize: 15.86, marginTop:"5%", marginBottom:"5%"}]}>Начать уборку</Text>
           </View>
         </TouchableOpacity>

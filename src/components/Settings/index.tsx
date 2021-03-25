@@ -1,41 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import MainHeader from './MainHeader';
+
 import SettingsList from 'react-native-settings-list';
-import { getData, storeData } from "../../storage";
+import { getData, storeData } from "../../actions/asyncStorage";
 
 const Settings = (props: any) => {
-  const [switchValue, setSwitch] = useState(true);
-
-  const saveSwitch = () => {
-    storeData(switchValue.toString());
-  }
-
+  const [switchValue, setSwitch] = useState<boolean | undefined>(undefined);
+  getData().then((value) => {
+    setSwitch(value);
+  })
   useEffect(()=>{
-    getData().then((value) => {
-      setSwitch(value);
-    })
     return function cleanup(){
-      storeData(switchValue.toString());
+      if(switchValue !== undefined) storeData(switchValue.toString());
     }
   }, []);
-  return (
+  if(switchValue !== undefined) return (
     <View style={styles.container}>
       <MainHeader nav={props.navigation}/>
       <View style={{flex:8.7}}>
-      <SettingsList>
-        <SettingsList.Item
+        <SettingsList>
+          <SettingsList.Item
           hasNavArrow={false}
           switchState={switchValue}
-          switchOnValueChange={() => {
+          onPress={() => {
             setSwitch(!switchValue);
-            saveSwitch();
           }}
           hasSwitch={true}
           title='Dark theme'/>
-      </SettingsList>
+          <SettingsList.Item
+            title='Управление роботом-пылесос...'
+            backgroundColor='#D1D1D1'
+            titleStyle={{color:'black'}}
+            hasNavArrow={false}
+            onPress={() => props.navigation.navigate('ManageVacuum')}/>
+          <SettingsList.Item
+            title='Информация'
+            backgroundColor='#D1D1D1'
+            titleStyle={{color:'black'}}
+            hasNavArrow={false}
+            onPress={() => props.navigation.navigate('Info')}/>
+          <SettingsList.Item
+            title='Обновление прошивки'
+            backgroundColor='#D1D1D1'
+            titleStyle={{color:'black'}}
+            hasNavArrow={false}
+            onPress={() => props.navigation.navigate('Update')}/>
+          <SettingsList.Item
+            title='Сброс настроек'
+            backgroundColor='#D1D1D1'
+            titleStyle={{color:'black'}}
+            hasNavArrow={false}
+            onPress={() => props.navigation.navigate('Reset')}/>
+        </SettingsList>
       </View>
     </View>
+  );
+  else return(
+    <ActivityIndicator size="large" color="#fff" />
   );
 }
 

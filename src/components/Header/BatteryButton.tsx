@@ -54,7 +54,7 @@ const BatteryButton = (props: any) => {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: "33%"
+        marginRight: "5%"
     },
     button: {
         backgroundColor: "#212121",
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     },
     recharge:{
         marginBottom: "2%",
-        // marginTop:"14.5%",
         alignItems: "center",
         alignSelf: "center",
         justifyContent:"center",

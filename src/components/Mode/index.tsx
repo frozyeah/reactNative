@@ -29,10 +29,10 @@ const DATA = [
     },
 ];
 
-const Item = ({ item, onPress, style, textStyle, fill }: any) => (
+const Item = ({ item, onPress, style, textStyle }: any) => (
     <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
-        <item.Icon fill={fill} />
-        <Text style={[textStyle.text]}>
+        <item.Icon />
+        <Text style={textStyle.text}>
             {item.title}
         </Text>
     </TouchableOpacity>
@@ -43,15 +43,13 @@ const Mode = (props: any) => {
 
     const renderItem = ({ item }: any) => {
         const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
-        const color = item.id === selectedId ? "white" : "#418FED";
-        const fill = item.id === selectedId ? "white" : "#418FED";
+        const color = item.id === selectedId ? "#fff" : "#418FED";
         return (
           <Item
             item={item}
             onPress={() => setSelectedId(item.id)}
             style={{ backgroundColor }}
-            textStyle={[props.text, {color}]}
-            fill={fill}
+            textStyle={[props.text, {color: color}]}
           />
         );
     };

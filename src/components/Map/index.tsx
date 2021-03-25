@@ -28,10 +28,10 @@ const Map = (props: any) => {
       transparent={true}
       visible={modalVisible}>
         <View style={{backgroundColor:"rgba(38,38,38,0.6)", width:"100%", height:"100%", alignSelf:"center"}}>
-          <View style={{height:"73.6%", backgroundColor:"#4F4F4F", marginTop:"21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent:"space-around"}}>
+          <View style={styles.modalContainer}>
             <View style={styles.header}>
               <View style={{flexDirection:"row"}}>
-                <MapIcon />
+                <MapIcon style={{marginRight:"4%", alignSelf:"center"}} />
                 <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>
                   Карта уборки
                 </Text>
@@ -43,8 +43,8 @@ const Map = (props: any) => {
               </TouchableOpacity>
             </View>
             <Plan style={{alignSelf:"center"}}/>
-            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
-              <TouchableOpacity activeOpacity={0.7} style={[styles.button,{backgroundColor:"#59A1F6"}]}>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", paddingTop: "5%"}}>
+              <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#59A1F6", marginRight:"5%"}]}>
                 <Reset />
                 <Text style={[props.text, {color: "#fff", fontSize: 14.64, alignSelf:"center"}]}>Reset Map</Text>
               </TouchableOpacity>
@@ -61,63 +61,77 @@ const Map = (props: any) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      marginLeft: "8%",
-      marginRight: "8%",
-      marginBottom: "2%",
-      backgroundColor:"#252525",
-      flex: 1,
-      borderRadius: 20,
-    },
-    content:{
-      justifyContent:"space-between",
-      flexDirection:"row",
-      alignItems:"center",
-    },
-    head:{
-      marginLeft: "5%",
-      marginTop: "4.7%",
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    open: {
-      justifyContent: "flex-end",
-      alignItems: "center",
-      alignSelf: "center",
-      marginTop: "5%",
-      // backgroundColor: "#000",
-      height: 40,
-      width: 40,
-      borderRadius: 20,
-    },
-    close: {
-      justifyContent:"center",
-      alignItems:"center",
-      marginTop:"5%",
-      // backgroundColor: "#000",
-      height: 40,
-      width: 40,
-      borderRadius: 20,
-    },
-    header:{
-      justifyContent:"space-around",
-      flexDirection:"row",
-      alignItems:"center",
-    },
-    text: {
-      marginLeft: "2%",
-      color: "white",
-      fontSize: 21.96
-    },
-    button:{
-      marginBottom: "2%",
-      // marginTop:"14.5%",
-      alignItems: "center",
-      alignSelf: "center",
-      justifyContent:"center",
-      borderRadius: 10,
-      height: "40%",
-      width: "27.15%"
+  container: {
+    marginLeft: "8%",
+    marginRight: "8%",
+    marginBottom: "2%",
+    backgroundColor:"#252525",
+    flex: 1,
+    borderRadius: 20,
+  },
+  modalContainer: {
+    height:"73.6%",
+    backgroundColor:"#4F4F4F",
+    marginTop:"21.8%",
+    marginLeft: "8%",
+    marginRight: "8%",
+    marginBottom: "2%",
+    borderRadius: 20,
+    justifyContent:"space-around"
+  },
+  content:{
+    justifyContent:"space-between",
+    flexDirection:"row",
+    alignItems:"center",
+  },
+  head:{
+    marginLeft: "5%",
+    marginTop: "4.7%",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  open: {
+    justifyContent: "flex-end",
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: "5%",
+    // backgroundColor: "#000",
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+  },
+  close: {
+    justifyContent:"center",
+    alignSelf:"center",
+    alignItems:"center",
+    marginTop:"5%",
+    // backgroundColor: "#000",
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+  },
+  header:{
+    marginTop: "6%",
+    marginBottom: "8%",
+    justifyContent:"space-around",
+    flexDirection:"row",
+    alignItems:"center",
+  },
+  text: {
+    marginLeft: "2%",
+    color: "white",
+    fontSize: 21.96
+  },
+  button:{
+    paddingVertical:"6%",
+    marginBottom: "2%",
+    // marginTop:"14.5%",
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent:"center",
+    borderRadius: 10,
+    height: "40%",
+    width: "27.15%"
   },
 });
 

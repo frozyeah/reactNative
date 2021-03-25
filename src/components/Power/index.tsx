@@ -42,7 +42,7 @@ const Power = (props: any) => {
 
     const renderItem = ({ item }: any) => {
         const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
-        const color = item.id === selectedId ? "white" : "#418FED";
+        const color = item.id === selectedId ? "#fff" : "#418FED";
         return (
           <Item
             item={item}

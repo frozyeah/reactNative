@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
 import BatteryButton from "./BatteryButton";
 import SettingsButton from "./SettingsButton";
 
@@ -27,13 +27,14 @@ const Header = (props: any) => {
 
 const styles = StyleSheet.create({
     container: {
-      marginTop: "5%",
+      marginTop: StatusBar.currentHeight,
       marginLeft: "8%",
       marginRight: "8%",
       marginBottom: "2%",
       alignItems: "center",
       flex: 1,
-      flexDirection: "row"
+      flexDirection: "row",
+      justifyContent: "space-between"
     },
     avatar: {
       backgroundColor: "#212121",
@@ -49,7 +50,8 @@ const styles = StyleSheet.create({
       alignSelf: "center"
     },
     right: {
-      flexDirection: "row"
+      flexDirection: "row",
+      justifyContent: "flex-end"
     }
 });
 
