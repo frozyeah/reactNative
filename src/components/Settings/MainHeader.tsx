@@ -15,11 +15,11 @@ const MainHeader = (props: any) => {
                 <View style={styles.text}>
                     <Text style={[{fontSize: 16.86, color:"#fff"}, props.text]}>Nick Korzh</Text>
                 </View>
-                <TouchableOpacity activeOpacity={0.7}>
-                    <View style={styles.edit}>
+                <View style={{justifyContent:"center"}} >
+                    <TouchableOpacity style={styles.edit} activeOpacity={0.7}>
                         <Edit style={{height:"100%", width:"100%", alignSelf:"center"}} />
-                    </View>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
             </View>
             <TouchableOpacity activeOpacity={0.7} style={styles.right} onPressOut={() => props.nav.navigate('MainScreen')}>
                 <Home height={25} width={25} />

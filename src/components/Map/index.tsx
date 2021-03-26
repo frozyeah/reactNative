@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   header:{
     marginTop: "6%",
-    marginBottom: "8%",
+    marginBottom: "14%",
     justifyContent:"space-around",
     flexDirection:"row",
     alignItems:"center",

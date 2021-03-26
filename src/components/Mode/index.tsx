@@ -7,73 +7,73 @@ import Spot from "../../../assets/svg/spot.svg";
 import Random from "../../../assets/svg/random.svg";
 
 const DATA = [
-    {
-        id: "1",
-        title: "Auto",
-        Icon: Auto
-    },
-    {
-        id: "2",
-        title: "Edge",
-        Icon: Edge
-    },
-    {
-        id: "3",
-        title: "Spot",
-        Icon: Spot
-    },
-    {
-        id: "4",
-        title: "Random",
-        Icon: Random
-    },
+  {
+    id: "1",
+    title: "Auto",
+    Icon: Auto
+  },
+  {
+    id: "2",
+    title: "Edge",
+    Icon: Edge
+  },
+  {
+    id: "3",
+    title: "Spot",
+    Icon: Spot
+  },
+  {
+    id: "4",
+    title: "Random",
+    Icon: Random
+  },
 ];
 
 const Item = ({ item, onPress, style, textStyle }: any) => (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
-        <item.Icon />
-        <Text style={textStyle.text}>
-            {item.title}
-        </Text>
-    </TouchableOpacity>
+  <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
+    <item.Icon />
+    <Text style={textStyle.text}>
+      {item.title}
+    </Text>
+  </TouchableOpacity>
 );
 
 const Mode = (props: any) => {
-    const [selectedId, setSelectedId] = useState("1");
+  const [selectedId, setSelectedId] = useState("1");
 
-    const renderItem = ({ item }: any) => {
-        const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
-        const color = item.id === selectedId ? "#fff" : "#418FED";
-        return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-            style={{ backgroundColor }}
-            textStyle={[props.text, {color: color}]}
-          />
-        );
-    };
-
+  const renderItem = ({ item }: any) => {
+    const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
+    const color = item.id === selectedId ? "#fff" : "#418FED";
     return (
-      <View style={styles.container}>
-        <View style={styles.head}>
-          <ModeIcon />
-          <Text style={[styles.text, props.text]}>
-            Режим уборки
-          </Text>
-        </View>
-        <View style={styles.radioContainer}>
-            <FlatList
-            numColumns={4}
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            extraData={selectedId}
-            contentContainerStyle={styles.radioContainer}
-            />
-        </View>
-      </View>
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        style={{ backgroundColor }}
+        textStyle={[props.text, {color: color}]}
+      />
     );
+  };
+  return (
+    <View style={styles.container}>
+      <View style={styles.head}>
+        <ModeIcon />
+        <Text style={[styles.text, props.text]}>
+          Режим уборки
+        </Text>
+      </View>
+      <View style={styles.radioContainer}>
+        <FlatList
+          scrollEnabled={false}
+          numColumns={4}
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          extraData={selectedId}
+          contentContainerStyle={styles.radioContainer}
+        />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

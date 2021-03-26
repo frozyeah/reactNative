@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -37,6 +37,7 @@ const MainScreen = ({navigation}: any, theme: any) => {
 
 const App = () => {
   const {theme, isDark} = useTheme();
+  // const [isLoading, setLoading] = useState(true);
   let [fontsLoaded] = useFonts({
     'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
   });
@@ -56,11 +57,11 @@ const App = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen
           name="MainScreen">{(props:any) => <MainScreen theme={theme} {...props} />}</Stack.Screen>
-          <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Info" component={Info} />
-          <Stack.Screen name="ManageVacuum" component={ManageVacuum} />
-          <Stack.Screen name="Reset" component={Reset} />
-          <Stack.Screen name="Update" component={Update} />
+          <Stack.Screen name="Settings">{(props:any) => <Settings text={styles.text} {...props} />}</Stack.Screen>
+          <Stack.Screen name="Info">{(props:any) => <Info text={styles.text} {...props} />}</Stack.Screen>
+          <Stack.Screen name="ManageVacuum">{(props:any) => <ManageVacuum text={styles.text} {...props} />}</Stack.Screen>
+          <Stack.Screen name="Reset">{(props:any) => <Reset text={styles.text} {...props} />}</Stack.Screen>
+          <Stack.Screen name="Update">{(props:any) => <Update text={styles.text} {...props} />}</Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeManager>

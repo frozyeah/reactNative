@@ -5,74 +5,75 @@ import Silent from "../../../assets/svg/silent.svg";
 import Turbo from "../../../assets/svg/turbo.svg";
 
 const DATA = [
-    {
-        id: "1",
-        title: "Silent",
-        Icon: Silent
-    },
-    {
-        id: "2",
-        title: "Standart",
-        Icon: Silent
-    },
-    {
-        id: "3",
-        title: "Spot",
-        Icon: Silent
-    },
-    {
-        id: "4",
-        title: "Turbo",
-        Icon: Turbo
-    },
+  {
+    id: "1",
+    title: "Silent",
+    Icon: Silent
+  },
+  {
+    id: "2",
+    title: "Standart",
+    Icon: Silent
+  },
+  {
+    id: "3",
+    title: "Spot",
+    Icon: Silent
+  },
+  {
+    id: "4",
+    title: "Turbo",
+    Icon: Turbo
+  },
 ];
 
 const Item = ({ item, onPress, style, textStyle }: any) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
-      <item.Icon fill="red" />
-      <Text style={[textStyle.text]}>
-          {item.title}
-      </Text>
+    <item.Icon />
+    <Text style={[textStyle.text]}>
+      {item.title}
+    </Text>
   </TouchableOpacity>
 );
 
 
 const Power = (props: any) => {
-    const [selectedId, setSelectedId] = useState("4");
+  const [selectedId, setSelectedId] = useState("4");
 
-    const renderItem = ({ item }: any) => {
-        const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
-        const color = item.id === selectedId ? "#fff" : "#418FED";
-        return (
-          <Item
-            item={item}
-            onPress={() => setSelectedId(item.id)}
-            style={{ backgroundColor }}
-            textStyle={[props.text, {color}]}
-          />
-        );
-    };
-
+  const renderItem = ({ item }: any) => {
+    const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
+    const color = item.id === selectedId ? "#fff" : "#418FED";
     return (
-        <View style={styles.container}>
-            <View style={styles.head}>
-                <PowerIcon />
-                <Text style={[styles.text, props.text]}>
-                    Мощность всасывания
-                </Text>
-            </View>
-            <View style={styles.radioContainer}>
-                <FlatList
-                numColumns={4}
-                data={DATA}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-                extraData={selectedId}
-                contentContainerStyle={styles.radioContainer}
-                />
-            </View>
-        </View>
+      <Item
+        item={item}
+        onPress={() => setSelectedId(item.id)}
+        style={{ backgroundColor }}
+        textStyle={[props.text, {color}]}
+      />
     );
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.head}>
+        <PowerIcon />
+        <Text style={[styles.text, props.text]}>
+          Мощность всасывания
+        </Text>
+      </View>
+      <View style={styles.radioContainer}>
+        <FlatList
+          scrollEnabled={false}
+          numColumns={4}
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          extraData={selectedId}
+          contentContainerStyle={styles.radioContainer}
+        />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
