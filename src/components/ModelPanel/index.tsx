@@ -6,16 +6,16 @@ const ModelPanel = (props: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.modelName}>
-        <Text style={[props.text, styles.text]}>
+        <Text style={[styles.text]}>
           Robot cleaner
         </Text>
-        <Text style={[props.text, styles.text]}>
+        <Text style={[styles.text, {fontFamily: "Gilroy"}]}>
           Valiron E34
         </Text>
         <TouchableOpacity activeOpacity={0.7}>
           <View style={styles.button}>
             <PowerButton style={{marginTop:"5%"}}/>
-            <Text style={[props.text, {color: "#fff", fontSize: 15.86, marginTop:"5%", marginBottom:"5%"}]}>Начать уборку</Text>
+            <Text style={{color: "#fff", fontSize: 15.86, marginTop:"5%", marginBottom:"5%", fontFamily: "Gilroy"}}>Начать уборку</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 19.52,
-    color: "white"
+    color: "white",
+    fontFamily: "Gilroy"
   },
   modelName:{
     marginTop:"7%",

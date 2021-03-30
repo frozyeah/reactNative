@@ -19,7 +19,7 @@ const BatteryButton = (props: any) => {
                         <View style={styles.header}>
                             <View style={{flexDirection:"row"}}>
                                 <Image source={require("../../../assets/img/low-battery.png")} style={{resizeMode:"contain", flex:0.35, marginRight:"2%"}} />
-                                <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>Уровень заряда</Text>
+                                <Text style={{fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start", fontFamily: "Gilroy"}}>Уровень заряда</Text>
                             </View>
                             <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                                 <View style={styles.close}>
@@ -28,16 +28,16 @@ const BatteryButton = (props: any) => {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity activeOpacity={0.7} style={{height:178, width:178, backgroundColor:"#59A1F6", borderRadius:89, alignSelf:"center", justifyContent:"center"}}>
-                            <Text style={[props.text, {color:"white", fontSize:80.84, alignSelf:"center"}]}>
+                            <Text style={{color:"white", fontSize:80.84, alignSelf:"center", fontFamily: "Gilroy"}}>
                                 33%
                             </Text>
                         </TouchableOpacity>
-                        <Text style={[props.text, {color:"white", fontSize:15.86, alignSelf:"center"}]}>
+                        <Text style={{color:"white", fontSize:15.86, alignSelf:"center", fontFamily: "Gilroy"}}>
                             Заряда хватит на 1 час и 27 минут
                         </Text>
                         <TouchableOpacity activeOpacity={0.7} style={styles.recharge}>
                             <RechargeIcon />
-                            <Text style={[props.text, {color: "#fff", fontSize: 14.64, alignSelf:"center"}]}>Recharge</Text>
+                            <Text style={{color: "#fff", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Recharge</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

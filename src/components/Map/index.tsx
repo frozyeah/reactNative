@@ -14,7 +14,7 @@ const Map = (props: any) => {
       <View style={styles.content}>
         <View style={styles.head}>
           <MapIcon />
-          <Text style={[styles.text, props.text]}>
+          <Text style={[styles.text]}>
             Карта уборки
           </Text>
         </View>
@@ -32,7 +32,7 @@ const Map = (props: any) => {
             <View style={styles.header}>
               <View style={{flexDirection:"row"}}>
                 <MapIcon style={{marginRight:"4%", alignSelf:"center"}} />
-                <Text style={[props.text, {fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>
+                <Text style={{fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start", fontFamily: "Gilroy"}}>
                   Карта уборки
                 </Text>
               </View>
@@ -46,11 +46,11 @@ const Map = (props: any) => {
             <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", paddingTop: "5%"}}>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#59A1F6", marginRight:"5%"}]}>
                 <Reset />
-                <Text style={[props.text, {color: "#fff", fontSize: 14.64, alignSelf:"center"}]}>Reset Map</Text>
+                <Text style={{color: "#fff", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Reset Map</Text>
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button,{backgroundColor:"#fff"}]}>
                 <EditMap />
-                <Text style={[props.text, {color: "#418FED", fontSize: 14.64, alignSelf:"center"}]}>Edit Map</Text>
+                <Text style={{color: "#418FED", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Edit Map</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "2%",
     color: "white",
-    fontSize: 21.96
+    fontSize: 21.96,
+    fontFamily: "Gilroy"
   },
   button:{
     paddingVertical:"6%",

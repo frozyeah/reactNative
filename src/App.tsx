@@ -39,7 +39,7 @@ const App = () => {
   const {theme, isDark} = useTheme();
   // const [isLoading, setLoading] = useState(true);
   let [fontsLoaded] = useFonts({
-    'Gilroy-Light': require('../assets/fonts/Gilroy-Light.ttf'),
+    'Gilroy': require('../assets/fonts/Gilroy-Medium.ttf'),
   });
   useEffect(()=>{
     console.log(theme);
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   text: {
-    fontFamily: "Gilroy-Light"
+    fontFamily: "Gilroy"
   }
 });
 

@@ -29,19 +29,18 @@ const DATA = [
     }
 ]
 
-const Item = (item: any, font: object, style?: object) => (
-    <TouchableOpacity activeOpacity={0.7} style={[styles.element, style]}>
-        {console.log(font)}
+const Item = (item: any) => (
+    <TouchableOpacity activeOpacity={0.7} style={styles.element}>
       <View style={{flexDirection: "column"}}>
-        <Text style={[font, {color:"white", fontSize:20}]}>
+        <Text style={{color:"white", fontSize:20, fontFamily: "Gilroy"}}>
           {item.title}
         </Text>
-        <Text style={[font, {color:"rgba(255,255,255,0.5)"}]}>
+        <Text style={{color:"rgba(255,255,255,0.5)", fontFamily: "Gilroy"}}>
           {item.bottomText}
         </Text>
       </View>
       <View style={{justifyContent: "flex-end", alignSelf:"center"}}>
-          <Text style={{color:"#4492EE", fontSize:32}}>
+          <Text style={{color:"#4492EE", fontSize:32, fontFamily: "Gilroy"}}>
               {item.percents}
           </Text>
       </View>
@@ -49,13 +48,12 @@ const Item = (item: any, font: object, style?: object) => (
 );
 
 const ManageVacuum = (props: any) => {
-    const font = props.text;
     return(
         <View style={styles.container}>
             <SubHeader nav={props.navigation} />
             <View style={{flex:8.7, justifyContent: "flex-start"}}>
                 <View style={styles.head}>
-                    <Text style={[font, {fontSize:19.96, color: "white"}]}>
+                    <Text style={{fontSize:19.96, color: "white", fontFamily: "Gilroy"}}>
                         Управление роботом-пылесосом
                     </Text>
                 </View>
@@ -64,8 +62,7 @@ const ManageVacuum = (props: any) => {
                 </View>
                 <FlatList
                 data={DATA}
-                renderItem={({item})=> Item(item, font)}
-                extraData={font}
+                renderItem={({item})=> Item(item)}
                 ListHeaderComponent={View}
                 ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "#4F4F4F"}}
                 />
@@ -80,6 +77,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#000000",
     },
     element:{
+        justifyContent: "space-between",
         borderBottomWidth: 0.5,
         borderColor: "#4F4F4F",
         width: "100%",

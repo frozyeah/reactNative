@@ -7,7 +7,6 @@ const Info = (props: any) => {
         <View style={styles.container}>
             <SubHeader nav={props.navigation} />
             <View style={{flex:8.7}}>
-                
             </View>
         </View>
     );

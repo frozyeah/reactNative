@@ -79,14 +79,13 @@ const DATA = [
   },
 ]
 
-const Item = ({ item, onPress, style, font }: any) => (
+const Item = ({ item, onPress, style }: any) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.element, style]}>
     <View style={{flexDirection: "column"}}>
-      {console.log(font)}
-      <Text style={[font, {color:"white", fontSize:25}]}>
+      <Text style={{color:"white", fontSize:25, fontFamily: "Gilroy"}}>
         {item.hour+":"+item.min}
       </Text>
-      <Text style={[font, {color:"rgba(255,255,255,0.4)"}]}>
+      <Text style={{color:"rgba(255,255,255,0.4)", fontFamily: "Gilroy"}}>
         {item.mode+", "+item.days+", "+item.power}
       </Text>
     </View>
@@ -102,7 +101,7 @@ const Planner = (props: any) => {
       <View style={styles.content}>
         <View style={styles.head}>
           <PlannerMode />
-          <Text style={[styles.text, props.text]}>
+          <Text style={styles.text}>
             Планирование уборки
           </Text>
         </View>
@@ -121,7 +120,7 @@ const Planner = (props: any) => {
             <View style={styles.header}>
               <View style={{flexDirection:"row"}}>
                 <PlannerMode style={{marginRight:"4%", alignSelf:"center"}} />
-                <Text style={[props.text, {fontSize: 21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start"}]}>
+                <Text style={{fontSize: 21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start", fontFamily: "Gilroy"}}>
                   Планирование уборки
                 </Text>
               </View>
@@ -135,7 +134,6 @@ const Planner = (props: any) => {
                 <FlatList
                 data={DATA}
                 renderItem={Item}
-                extraData={font}
                 ListHeaderComponent={View}
                 ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "rgba(0, 0, 0, 0.2);"}}
                 />
@@ -234,7 +232,8 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "2%",
     color: "white",
-    fontSize:21.96
+    fontSize:21.96,
+    fontFamily: "Gilroy"
   }
 });
 

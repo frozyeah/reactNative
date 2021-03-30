@@ -32,7 +32,7 @@ const DATA = [
 const Item = ({ item, onPress, style, textStyle }: any) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
     <item.Icon />
-    <Text style={textStyle.text}>
+    <Text style={[textStyle, {fontFamily: "Gilroy"}]}>
       {item.title}
     </Text>
   </TouchableOpacity>
@@ -49,7 +49,7 @@ const Mode = (props: any) => {
         item={item}
         onPress={() => setSelectedId(item.id)}
         style={{ backgroundColor }}
-        textStyle={[props.text, {color: color}]}
+        textStyle={{ color }}
       />
     );
   };
@@ -57,7 +57,7 @@ const Mode = (props: any) => {
     <View style={styles.container}>
       <View style={styles.head}>
         <ModeIcon />
-        <Text style={[styles.text, props.text]}>
+        <Text style={styles.text}>
           Режим уборки
         </Text>
       </View>
@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
     text: {
       marginLeft: "2%",
       color: "white",
-      fontSize:21.96
+      fontSize:21.96,
+      fontFamily: "Gilroy"
     },
     buttonText: {
       color: "white"
