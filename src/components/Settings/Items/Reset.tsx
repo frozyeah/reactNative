@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import SubHeader from '../SubHeader';
 
 const Reset = (props: any) => {
@@ -7,6 +7,22 @@ const Reset = (props: any) => {
         <View style={styles.container}>
             <SubHeader nav={props.navigation} />
             <View style={{flex:8.7}}>
+                <View style={styles.head}>
+                    <Text style={{fontSize:19.96, color: "white", fontFamily: "Gilroy"}}>
+                        Сброс настроек
+                    </Text>
+                </View>
+                <View style={{flex:10, alignContent:"center", alignSelf:"center"}}>
+                    <Text style={{fontSize:14.96, color: "rgba(255, 255, 255, 0.6)", fontFamily: "Gilroy", paddingHorizontal: "7%", paddingTop:"5%"}}>
+                        Вы уверенны, что хотите сбросить настройки к начальным? Ваши данные будут сброшены.
+                    </Text>
+                    <TouchableOpacity activeOpacity={0.7} style={{width: "75%", height:"8%", backgroundColor:"#59A1F6", justifyContent:"center", 
+                    borderRadius: 10, alignSelf:"center", paddingHorizontal:"5%", marginTop:"10%"}}>
+                    <Text style={{alignSelf:"center", color:"white", fontFamily:"Gilroy", fontSize: 15}}>
+                        Сбросить настройки
+                    </Text>
+                </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -17,6 +33,13 @@ const styles = StyleSheet.create({
       flex:1,
       backgroundColor:"#000000",
     },
+    head:{
+        flex: 1,
+        alignItems:"center",
+        borderBottomWidth: 0.5,
+        borderColor: "#4F4F4F",
+        width:"100%"
+    }
 })
 
 export default Reset;

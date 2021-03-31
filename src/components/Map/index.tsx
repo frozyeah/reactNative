@@ -5,6 +5,7 @@ import Back from "../../../assets/svg/back.svg";
 import Plan from "../../../assets/svg/plan.svg";
 import Reset from "../../../assets/svg/reset.svg";
 import EditMap from "../../../assets/svg/editMap.svg";
+import Close from "../../../assets/svg/closeplan.svg";
 
 const Map = (props: any) => {
   const [modalVisible, setVisible] = useState(false);
@@ -38,17 +39,17 @@ const Map = (props: any) => {
               </View>
               <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                 <View style={styles.close}>
-                  <Back width={17} height={17} />
+                  <Close width={17} height={17} />
                 </View>
               </TouchableOpacity>
             </View>
             <Plan style={{alignSelf:"center"}}/>
-            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center", paddingTop: "5%"}}>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#59A1F6", marginRight:"5%"}]}>
                 <Reset />
                 <Text style={{color: "#fff", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Reset Map</Text>
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.7} style={[styles.button,{backgroundColor:"#fff"}]}>
+              <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#fff"}]}>
                 <EditMap />
                 <Text style={{color: "#418FED", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Edit Map</Text>
               </TouchableOpacity>
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "2%",
+    justifyContent:"center",
     backgroundColor:"#252525",
     flex: 1,
     borderRadius: 20,
@@ -77,54 +79,56 @@ const styles = StyleSheet.create({
     marginRight: "8%",
     marginBottom: "2%",
     borderRadius: 20,
-    justifyContent:"space-around"
+    justifyContent:"space-between",
   },
   content:{
     justifyContent:"space-between",
     flexDirection:"row",
+    alignContent: "center",
     alignItems:"center",
   },
   head:{
-    marginLeft: "5%",
-    marginTop: "4.7%",
+    marginHorizontal: "5%",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   },
   open: {
-    justifyContent: "flex-end",
+    alignSelf:"flex-end",
+    alignContent:"center",
+    justifyContent: "center",
     alignItems: "center",
-    alignSelf: "center",
-    marginTop: "5%",
+    // marginTop: "5%",
     // backgroundColor: "#000",
     height: 40,
     width: 40,
     borderRadius: 20,
   },
   close: {
-    justifyContent:"center",
-    alignSelf:"center",
-    alignItems:"center",
-    marginTop:"5%",
+    justifyContent: "center",
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: "5%",
     // backgroundColor: "#000",
     height: 40,
     width: 40,
     borderRadius: 20,
   },
   header:{
-    marginTop: "6%",
-    marginBottom: "14%",
-    justifyContent:"space-around",
-    flexDirection:"row",
-    alignItems:"center",
+    marginTop: "3%",
+    marginBottom: "3%",
+    marginHorizontal:"5%",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
   },
   text: {
-    marginLeft: "2%",
+    marginLeft: "6%",
     color: "white",
     fontSize: 21.96,
     fontFamily: "Gilroy"
   },
   button:{
-    paddingVertical:"6%",
+    // paddingVertical:"6%",
     marginBottom: "2%",
     // marginTop:"14.5%",
     alignItems: "center",

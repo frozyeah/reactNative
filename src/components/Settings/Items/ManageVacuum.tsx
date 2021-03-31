@@ -4,25 +4,25 @@ import SubHeader from '../SubHeader';
 
 const DATA = [
     {
-        id: 1,
+        id: "1",
         title: "Фильтр",
         bottomText: "Замените через примерно 142h",
         percents: "94%"
     },
     {
-        id: 2,
+        id: "2",
         title: "Боковая щетка",
         bottomText: "Замените через примерно 192h",
         percents: "96%"
     },
     {
-        id: 3,
+        id: "3",
         title: "Основная щетка",
         bottomText: "Замените через примерно 292h",
         percents: "97%"
     },
     {
-        id: 4,
+        id: "4",
         title: "Датчики",
         bottomText: "Убрать через примерно 22h",
         percents: "73%"
@@ -57,15 +57,17 @@ const ManageVacuum = (props: any) => {
                         Управление роботом-пылесосом
                     </Text>
                 </View>
-                <View style={{alignItems:"flex-start"}}>
-                    <Image source={require("../../../../assets/img/vacuum-print.png")} style={{width:328,height:234, alignSelf:"center"}} />
+                <View style={{alignItems:"flex-start", flex: 5}}>
+                    <Image source={require("../../../../assets/img/vacuum-print.png")} style={{width:328, height:234, alignSelf:"center"}} />
                 </View>
-                <FlatList
-                data={DATA}
-                renderItem={({item})=> Item(item)}
-                ListHeaderComponent={View}
-                ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "#4F4F4F"}}
-                />
+                <View style={{alignSelf:"flex-start", flex:7}}>
+                    <FlatList
+                    data={DATA}
+                    renderItem={({item})=> Item(item)}
+                    ListHeaderComponent={View}
+                    ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "#4F4F4F"}}
+                    />
+                </View>
             </View>
         </View>
     );
@@ -82,12 +84,15 @@ const styles = StyleSheet.create({
         borderColor: "#4F4F4F",
         width: "100%",
         flexDirection: "row",
-        paddingHorizontal:"3%",
-        paddingVertical: "1%"
+        paddingHorizontal:"4%",
+        paddingVertical: "2.3%"
     },
     head:{
         flex: 1,
-        alignSelf: "center",
+        alignItems:"center",
+        borderBottomWidth: 0.5,
+        borderColor: "#4F4F4F",
+        width:"100%"
     }
 })
 

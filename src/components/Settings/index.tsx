@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ActivityIndicator, Text, TouchableOpacity, Switch, FlatList } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text, TouchableOpacity, FlatList, useColorScheme } from 'react-native';
+import ToggleSwitch from '../ToggleSwitch';
 import MainHeader from './MainHeader';
 import { getData, storeData } from "../../actions/asyncStorage";
 import Moon from "../../../assets/svg/moon.svg";
@@ -50,18 +51,20 @@ const Item = (props: any) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style]} onPressOut={props.onPress}>
     <View style={{flexDirection: "row", justifyContent:"center"}}>
       <props.item.icon style={{alignSelf: "center"}} />
-      <Text style={[styles.font, {color:"white", fontSize:20}]}>
+      <Text style={[styles.font, {color:"white", fontSize:20, paddingLeft: "2%"}]}>
         {props.item.title}
       </Text>
     </View>
     {!props.item.hasSwitch ? <View /> :
     <View style={{justifyContent: "flex-end"}}>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={props.isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={props.onValueChange}
-        value={props.isEnabled}
+      <ToggleSwitch
+      isOn={props.isEnabled}
+      onToggle={props.onPress}
+      onColor='#4cd137'
+      offColor='rgba(120, 120, 128, 0.32)'
+      label=""
+      style={{}}
+      labelStyle={{}}
       />
     </View>
     }
@@ -69,28 +72,32 @@ const Item = (props: any) => (
 );
 
 const Settings = (props: any) => {
-  const [switchValue, setSwitch] = useState(true);
+  const [switchValue, setSwitch] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
-  const font = props.text;
+  console.log(useColorScheme());
 
   getData('@theme').then((value) => {
     if(value !== undefined){
       setSwitch((value === 'true'));
       setLoading(false);
+    } else {
+      setSwitch((useColorScheme() === "dark"));
     }
   })
+
   useEffect(()=>{
     return function cleanup(){
       storeData('@theme', switchValue.toString());
     }
   }, []);
 
-  const renderItem = (item: any, font: object) => {
+  const renderItem = (item: any) => {
     let onPress: () => void;
     let onValueChange = () => {
       setSwitch(!switchValue)
     };
+
     if(item.hasSwitch){
       onPress = () => {
         setSwitch(!switchValue)
@@ -103,7 +110,6 @@ const Settings = (props: any) => {
 
     return (
       <Item
-        font={font}
         item={item}
         onPress={onPress}
         textStyle={[props.text]}
@@ -119,8 +125,7 @@ const Settings = (props: any) => {
       <View style={{flex:8.7}}>
         <FlatList
           data={DATA}
-          renderItem={({item})=> renderItem(item, font)}
-          extraData={font}
+          renderItem={({item})=> renderItem(item)}
           ListHeaderComponent={View}
           ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "#4F4F4F"}}
         />
@@ -128,8 +133,8 @@ const Settings = (props: any) => {
     </View>
   );
   else return(
-    <View style={{backgroundColor:"#000"}}>
-      <ActivityIndicator size="large" color="#fff" />
+    <View style={{backgroundColor:"#000", flex: 1}}>
+      <ActivityIndicator size="large" color="#fff" style={{flex:1}} />
     </View>
   );
 }
