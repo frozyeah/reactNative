@@ -72,13 +72,12 @@ const Item = (props: any) => (
 );
 
 const Settings = (props: any) => {
-  const [switchValue, setSwitch] = useState(false);
+  const [switchValue, setSwitch] = useState(true);
   const [isLoading, setLoading] = useState(true);
 
-  console.log(useColorScheme());
-
-  getData('@theme').then((value) => {
+  if(isLoading) getData('@theme').then((value) => {
     if(value !== undefined){
+      console.log(value);
       setSwitch((value === 'true'));
       setLoading(false);
     } else {
@@ -90,12 +89,12 @@ const Settings = (props: any) => {
     return function cleanup(){
       storeData('@theme', switchValue.toString());
     }
-  }, []);
+  }, [switchValue]);
 
   const renderItem = (item: any) => {
     let onPress: () => void;
     let onValueChange = () => {
-      setSwitch(!switchValue)
+      // setSwitch(!switchValue)
     };
 
     if(item.hasSwitch){

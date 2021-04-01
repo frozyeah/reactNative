@@ -25,7 +25,7 @@ const ToggleSwitch = (props: Props) => {
 
   const moveToggle = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 20]
+    outputRange: [2, 22]
   });
   
   const {
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   toggleContainer: {
-    width: 50,
-    height: 30,
-    marginLeft: 3,
+    width: 51,
+    height: 31,
+    // marginLeft: 3,
     borderRadius: 15,
     justifyContent: 'center',
   },
@@ -93,10 +93,10 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   toggleWheelStyle: {
-    width: 25,
-    height: 25,
+    width: 27,
+    height: 27,
     backgroundColor: 'white',
-    borderRadius: 12.5,
+    borderRadius: 13.5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

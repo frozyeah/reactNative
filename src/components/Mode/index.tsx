@@ -53,6 +53,7 @@ const Mode = (props: any) => {
       />
     );
   };
+  
   return (
     <View style={styles.container}>
       <View style={styles.head}>
