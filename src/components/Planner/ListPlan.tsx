@@ -109,7 +109,6 @@ const ListPlan = (props: any) => {
   
   if(isLoading) getData('@planner').then((value: any) => {
     if(value !== undefined){
-      console.log(value);
       setData(JSON.parse(value));
       setLoading(false);
     }

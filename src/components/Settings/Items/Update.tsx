@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
   },
-  head:{
-    alignItems:"center",
-    width:"100%",
-    paddingBottom:"4%"
+  head: {
+    alignItems: "center",
+    width: "100%",
+    paddingBottom: "4%"
   },
   header: {
     marginTop: "3.5%",

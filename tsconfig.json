@@ -9,5 +9,5 @@
     "resolveJsonModule": true,
     "strict": true
   },
-  "include": ["src", "svg.d.ts"]
+  "include": ["assets","src", "svg.d.ts"]
 }

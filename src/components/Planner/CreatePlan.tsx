@@ -65,16 +65,13 @@ const CreatePlan = (props: any) => {
     }
     const onPress = (id: any) => {
       let res = checkList;
-      console.log(res);
       if (res.includes(id)) {
         res = res.filter(function (value) {
           return value !== id;
         });
-        console.log(res);
         setList(res);
       } else {
         res.push(id);
-        console.log(res);
         setList(res);
       }
     }
@@ -142,7 +139,7 @@ const CreatePlan = (props: any) => {
           </Text>
         </View>
         <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-          <DropDownPicker
+          {/* <DropDownPicker
             items={[
               { label: 'Silent', value: 'silent'},
               { label: 'Standart', value: 'standart'},
@@ -157,10 +154,10 @@ const CreatePlan = (props: any) => {
             }}
             dropDownStyle={{ backgroundColor: '#fafafa' }}
             onChangeItem={item => setPower(item)}
-          />
-          {/* <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
+          /> */}
+          <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
             Менюшка
-          </Text> */}
+          </Text>
         </View>
       </View>
     </View>
