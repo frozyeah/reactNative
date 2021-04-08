@@ -3,25 +3,47 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, StatusBar } from 'reac
 import Home from "../../../assets/svg/home.svg";
 import Edit from "../../../assets/svg/pen.svg";
 
+const nightColors = {
+  font: {
+    color: "#fff"
+  },
+  circles: {
+    backgroundColor: "#212121"
+  }
+}
+
+const dayColors = {
+  font: {
+    color: "#000"
+  },
+  circles: {
+    backgroundColor: "#F8F8F8"
+  }
+}
+
 const MainHeader = (props: any) => {
+  let mode: any;
+  if (props.theme) mode = nightColors;
+  else mode = dayColors;
+
   return (
     <View style={styles.container}>
       <View style={styles.left}>
         <TouchableOpacity activeOpacity={0.7}>
-          <View style={styles.avatar}>
+          <View style={[styles.avatar, mode.circles]}>
             <Image source={require("../../../assets/img/avatar.png")} style={{ height: "100%", width: "100%", alignSelf: "center" }} />
           </View>
         </TouchableOpacity>
         <View style={styles.text}>
-          <Text style={{ fontSize: 16.86, color: "#fff", fontFamily: "Gilroy" }}>Nick Korzh</Text>
+          <Text style={[{ fontSize: 16.86, fontFamily: "Gilroy" }, mode.font]}>Nick Korzh</Text>
         </View>
         <View style={{ justifyContent: "center" }} >
-          <TouchableOpacity style={styles.edit} activeOpacity={0.7}>
+          <TouchableOpacity style={[styles.edit, mode.circles]} activeOpacity={0.7}>
             <Edit style={{ height: "100%", width: "100%", alignSelf: "center" }} />
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.right} onPressOut={() => props.nav.navigate('MainScreen')}>
+      <TouchableOpacity activeOpacity={0.7} style={[styles.right, mode.circles]} onPressOut={() => props.nav.navigate('MainScreen')}>
         <Home height={25} width={25} />
       </TouchableOpacity>
     </View>
@@ -40,13 +62,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   avatar: {
-    backgroundColor: "#212121",
+    // backgroundColor: "#212121",
     height: 55,
     width: 55,
     borderRadius: 27.5,
   },
   edit: {
-    backgroundColor: "#212121",
+    // backgroundColor: "#212121",
     height: 35.38,
     width: 35.38,
     borderRadius: 17.69,
@@ -69,7 +91,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   right: {
-    backgroundColor: "#212121",
+    // backgroundColor: "#212121",
     height: 55,
     width: 55,
     borderRadius: 27.5,

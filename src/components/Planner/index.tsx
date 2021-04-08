@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal, SafeAreaView, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
 import CreatePlan from "./CreatePlan";
 import ListPlan from "./ListPlan";
 import PlannerMode from "../../../assets/svg/planner.svg";
 import Back from "../../../assets/svg/back.svg";
+import { getData, storeData } from "../../actions/asyncStorage";
+import { getPlans } from "../../redux/actions";
+import { useSelector, useDispatch } from 'react-redux';
+
 
 
 const Planner = (props: any) => {
+  const [dataState, setData] = useState<object[]>(useSelector(getPlans));
   const [modalVisible, setVisible] = useState(false);
   const [isList, setList] = useState(true);
+  const [isLoading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log(dataState);
+  }, [dataState])
+
+  if (isLoading) getData('@planner').then((value: any) => {
+    if (value !== undefined) {
+      setData(JSON.parse(value));
+      dispatch({type:'CHANGE_PLANS', data: dataState});
+      setLoading(false);
+    }
+    return;
+  })
+
 
   return (
     <View style={styles.container}>
@@ -26,11 +47,13 @@ const Planner = (props: any) => {
         </TouchableOpacity>
       </View>
       <Modal animationType="fade"
-      transparent={true}
-      visible={modalVisible}>
-        <View style={{backgroundColor:"rgba(38,38,38,0.6)", width:"100%", height:"100%",
-         alignSelf:"center", justifyContent:"flex-end"}}>
-          {isList ? <ListPlan setList={() => setList(!isList)} closeModal={() => setVisible(!modalVisible)} /> : <CreatePlan onClose={() => setList(!isList)} />}
+        transparent={true}
+        visible={modalVisible}>
+        <View style={{
+          backgroundColor: "rgba(38,38,38,0.6)", width: "100%", height: "100%",
+          alignSelf: "center", justifyContent: "flex-end"
+        }}>
+          {isLoading ? (<View />) : (isList ? <ListPlan date={dataState} setList={() => setList(!isList)} closeModal={() => setVisible(!modalVisible)} /> : <CreatePlan date={dataState} onClose={() => setList(!isList)} />)}
         </View>
       </Modal>
     </View>
@@ -42,66 +65,66 @@ const styles = StyleSheet.create({
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "5%",
-    justifyContent:"center",
-    backgroundColor:"#252525",
+    justifyContent: "center",
+    backgroundColor: "#252525",
     flex: 1,
     borderRadius: 20
   },
-  element:{
+  element: {
     borderBottomWidth: 0.5,
     borderColor: "rgba(0, 0, 0, 0.2);",
     width: "100%",
-    paddingHorizontal:"5%",
+    paddingHorizontal: "5%",
     paddingVertical: "1%"
   },
-  content:{
-    justifyContent:"space-between",
-    flexDirection:"row",
+  content: {
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignContent: "center",
-    alignItems:"center",
+    alignItems: "center",
   },
-  head:{
+  head: {
     marginHorizontal: "5%",
     flexDirection: "row",
     alignItems: "center"
   },
-  button:{
+  button: {
     alignSelf: "center",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
     width: "20%",
-    height:"15%",
+    height: "15%",
     marginVertical: "3%",
   },
-  header:{
+  header: {
     marginTop: "6%",
     marginBottom: "8%",
     marginHorizontal: "5%",
-    justifyContent:"space-around",
-    flexDirection:"row",
-    alignItems:"center",
+    justifyContent: "space-around",
+    flexDirection: "row",
+    alignItems: "center",
   },
   list: {
-    flex:1,
-    justifyContent:"center",
+    flex: 1,
+    justifyContent: "center",
     paddingTop: "5%",
     alignContent: "flex-start",
     alignSelf: "flex-start",
     width: "100%"
   },
   modalContainer: {
-    height:"80.6%",
-    backgroundColor:"#4F4F4F",
+    height: "80.6%",
+    backgroundColor: "#4F4F4F",
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "5%",
     borderRadius: 20,
-    justifyContent:"flex-start"
+    justifyContent: "flex-start"
   },
   open: {
-    alignSelf:"flex-end",
-    alignContent:"center",
+    alignSelf: "flex-end",
+    alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
     // marginTop: "5%",
@@ -111,10 +134,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   close: {
-    justifyContent:"center",
-    alignItems:"center",
+    justifyContent: "center",
+    alignItems: "center",
     alignSelf: "center",
-    marginTop:"5%",
+    marginTop: "5%",
     // backgroundColor: "#000",
     height: 40,
     width: 40,
@@ -123,7 +146,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "4%",
     color: "white",
-    fontSize:21.96,
+    fontSize: 21.96,
     fontFamily: "Gilroy"
   }
 });

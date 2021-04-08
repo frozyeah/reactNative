@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal, SafeAreaView, FlatList } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
-import DatePicker from 'react-native-date-picker'
+import React, { useEffect, useMemo, useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Button, FlatList } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
+// import DatePicker from 'react-native-date-picker'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import PlannerMode from "../../../assets/svg/planner.svg";
 import Done from "../../../assets/svg/done.svg";
-import Power from '../Power';
+import { storeData } from '../../actions/asyncStorage';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPlans } from "../../redux/actions";
 
 const DATA = [
   {
@@ -46,13 +49,59 @@ const Item = ({ item, onPress, style }: any) => (
 );
 
 const CreatePlan = (props: any) => {
-  const [date, setDate] = useState(new Date());
+  const dispatch = useDispatch();
+  const dataState = useSelector(getPlans);
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [date, setDate] = useState<any>();
   const [checkList, setList] = useState<string[]>([]);
-  const [mode, setMode] = useState<object[]>();
-  const [power, setPower] = useState<object>();
+  const [mode, setMode] = useState<string>();
+  const [power, setPower] = useState<string>();
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const createObject = () => {
+    if (checkList !== [] && mode !== undefined && power !== undefined && date !== undefined) {
+      let daysList: string[] = [];
+      DATA.filter(function (value) {
+        if (checkList.includes(value.id)) {
+          daysList = daysList.concat(value.title);
+        }
+      });
+      let days = daysList.join("-").toLowerCase()
+      if (days === "сб-вс") {
+        days = "выходные дни";
+      } else if (days === "пн-вт-ср-чт-пт") {
+        days = "будние дни";
+      }
+
+      let newPlan = {
+        id: Date.now().toString(),
+        hour: date.hours,
+        min: date.min,
+        mode: mode,
+        days: days,
+        power: power.toLowerCase(),
+        isEnabled: true
+      };
+      let newlist: any;
+      if (dataState !== undefined) {
+        newlist = dataState.concat(newPlan);
+      } else {
+        newlist = [newPlan];
+      }
+      dispatch({ type: 'CHANGE_PLANS', data: newlist });
+      storeData("@planner", JSON.stringify(newlist))
+    }
+    props.onClose();
+  }
 
   useEffect(() => {
-  }, [checkList]);
+
+  }, []);
+
   const renderItem = ({ item }: any) => {
     let itemStyle: any;
     if (checkList.includes(item.id)) {
@@ -71,7 +120,7 @@ const CreatePlan = (props: any) => {
         });
         setList(res);
       } else {
-        res.push(id);
+        res = res.concat(id);
         setList(res);
       }
     }
@@ -93,7 +142,7 @@ const CreatePlan = (props: any) => {
             Планирование уборки
           </Text>
         </View>
-        <TouchableOpacity activeOpacity={0.7} onPressOut={() => props.onClose()}>
+        <TouchableOpacity activeOpacity={0.7} onPressOut={() => createObject()}>
           <View style={styles.close}>
             <Done width={17} height={17} />
           </View>
@@ -106,11 +155,35 @@ const CreatePlan = (props: any) => {
           </Text>
         </View>
         <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-          <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
-            Менюшка
-          </Text>
+          <ModalDropdown style={{}} defaultValue='Select'
+            options={[
+              'Auto', 'Edge', 'Spot', 'Random'
+            ]}
+            onSelect={(index: string, value: string) => { setMode(value) }}
+            renderButtonText={(rowData: any) => { return rowData.value }}
+          />
         </View>
       </View>
+      <Button title="Show Time Picker" onPress={() => {
+        setDatePickerVisibility(true);
+      }} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="time"
+        textColor="black"
+        isDarkModeEnabled={true}
+        onConfirm={(time: any) => {
+          console.log(time);
+          let hours = time.getHours();
+          let min = time.getMinutes();
+          if (min < 10) {
+            min = "0" + min;
+          }
+          hideDatePicker();
+          setDate({ hours: hours, min: min });
+        }}
+        onCancel={hideDatePicker}
+      />
       {/* <DatePicker
         date={date}
         onDateChange={setDate}
@@ -139,25 +212,16 @@ const CreatePlan = (props: any) => {
           </Text>
         </View>
         <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-          {/* <DropDownPicker
-            items={[
-              { label: 'Silent', value: 'silent'},
-              { label: 'Standart', value: 'standart'},
-              { label: 'Medium', value: 'medium'},
-              { label: 'Turbo', value: 'turbo'}
+          <ModalDropdown style={{}} defaultValue='Select'
+            options={[
+              'Silent', 'Standart', 'Medium', 'Turbo'
             ]}
-            defaultValue={power}
-            containerStyle={{ height: 40, width: 160 }}
-            style={{ backgroundColor: '#fafafa' }}
-            itemStyle={{
-              justifyContent: 'flex-start'
-            }}
-            dropDownStyle={{ backgroundColor: '#fafafa' }}
-            onChangeItem={item => setPower(item)}
-          /> */}
-          <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
+            onSelect={(index: string, value: string) => { setPower(value) }}
+            renderButtonText={(rowData: any) => { return rowData.value }}
+          />
+          {/* <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
             Менюшка
-          </Text>
+          </Text> */}
         </View>
       </View>
     </View>
@@ -208,6 +272,17 @@ const styles = StyleSheet.create({
     marginTop: "4.7%",
     flexDirection: "row",
     alignItems: "center"
+  },
+  dropdown: {
+    flexDirection: 'row',
+    height: 40,
+    alignItems: 'center',
+  },
+  dropdown_text: {
+    marginHorizontal: 4,
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.4)',
+    textAlignVertical: 'center',
   },
   button: {
     alignSelf: "center",

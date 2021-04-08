@@ -15,14 +15,6 @@ const ToggleSwitch = (props: Props) => {
 
   let animatedValue = new Animated.Value(0);
 
-  // const defaultProps: Props = {
-  //   label: '',
-  //   onToggle: () => {},
-  //   style: {},
-  //   isOn: false,
-  //   labelStyle: {}
-  // }
-
   const moveToggle = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [2, 22]

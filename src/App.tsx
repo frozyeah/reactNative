@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ActivityIndicator, useColorScheme } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useFonts } from "@use-expo/font";
+import { useSelector, useDispatch } from 'react-redux';
+import { useFonts } from 'expo-font';
+
 import Header from './components/Header';
 import ModelPanel from './components/ModelPanel';
 import Mode from './components/Mode';
@@ -31,11 +33,15 @@ const dayColors = {
   }
 }
 
-const MainScreen = ({ navigation }: any, theme: any) => {
-  console.log(theme);
+const MainScreen = ({ navigation }: any, theme: boolean) => {
   let mode: any;
-  if (theme) mode = nightColors;
-  else mode = dayColors;
+  if (theme) {
+    mode = nightColors;
+  } else {
+    mode = dayColors;
+  }
+  console.log(theme, mode);
+
   return (
     <View style={[styles.container, mode.home]}>
       <Header text={styles.text} nav={navigation} />
@@ -52,18 +58,22 @@ const App = () => {
   const [theme, setTheme] = useState(true);
   const [isLoading, setLoading] = useState(true);
 
-  let [fontsLoaded] = useFonts({
-    'Gilroy': require('../assets/fonts/Gilroy-Medium.ttf'),
+  const dispatch = useDispatch();
+
+  // "https://github.com/ReWWeR/teleset/blob/master/src/fonts/Radomir%20Tinkov%20-%20Gilroy-Medium.otf?raw=true"
+
+  let [fontsLoaded, error] = useFonts({
+    Gilroy: require('../assets/fonts/Gilroy-Medium.ttf'),
   });
+
+  useEffect(() => {
+    // dispatch({type:"CHANGE_MODE", data: theme});
+  }, []);
 
   if (isLoading) checkTheme().then((value: boolean) => {
     setTheme(value);
     setLoading(false);
   });
-
-  useEffect(() => {
-    
-  }, [])
 
   if (!fontsLoaded && isLoading) {
     return (
@@ -72,6 +82,7 @@ const App = () => {
       </View>
     );
   } else {
+    console.log(1, fontsLoaded);
     return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -93,7 +104,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "black"
   },
   loader: {
     flex: 1,

@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Modal, ActivityIndicator, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Animated, ActivityIndicator, FlatList, Dimensions } from 'react-native';
+
 import { getData, storeData } from "../../actions/asyncStorage";
 import PlannerMode from "../../../assets/svg/planner.svg";
 import Close from "../../../assets/svg/closeplan.svg";
 import Plus from "../../../assets/svg/plus.svg";
 import ToggleSwitch from '../ToggleSwitch';
+
+import { SwipeRow } from 'react-native-swipe-list-view';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPlans } from "../../redux/actions";
 
 const DATA = [
   {
@@ -80,9 +85,10 @@ const DATA = [
     isEnabled: true
   },
 ]
+// onPress={() => onPress(item)}
 
 const Item = ({ item, onPress }: any) => (
-  <TouchableOpacity onPress={() => onPress(item)} activeOpacity={0.7} style={styles.element}>
+  <TouchableOpacity activeOpacity={1} style={styles.element}>
     <View style={{ flexDirection: "column" }}>
       <Text style={{ color: "white", fontSize: 25, fontFamily: "Gilroy" }}>
         {item.hour + ":" + item.min}
@@ -93,7 +99,7 @@ const Item = ({ item, onPress }: any) => (
     </View>
     <ToggleSwitch
       isOn={item.isEnabled}
-      onToggle={() => { }}
+      onToggle={() => onPress()}
       onColor='#4cd137'
       offColor='rgba(120, 120, 128, 0.32)'
       label=""
@@ -104,32 +110,81 @@ const Item = ({ item, onPress }: any) => (
 );
 
 const ListPlan = (props: any) => {
-  const [dataState, setData] = useState<object[]>();
-  const [isLoading, setLoading] = useState(true);
-  
-  if(isLoading) getData('@planner').then((value: any) => {
-    if(value !== undefined){
-      setData(JSON.parse(value));
-      setLoading(false);
+  const dispatch = useDispatch();
+  const [dataState, setData] = useState<object[]>(useSelector(getPlans));
+  const [animationIsRunning, setAnim] = useState(false);
+  const rowTranslateAnimatedValues: any = {};
+
+  console.log(dataState)
+
+  // storeData('@planner', JSON.stringify(DATA));
+  if (dataState !== undefined) {
+    dataState.forEach((item: any) => {
+      rowTranslateAnimatedValues[item.id] = new Animated.Value(1);
+    });
+  }
+
+  useEffect(() => {
+    return function cleanup() {
+      storeData('@planner', JSON.stringify(dataState));
     }
-  })
+  }, []);
+
+  const onSwipeValueChange = (swipeData: any) => {
+    const { key, value } = swipeData;
+    if (value < -65 && !animationIsRunning) {
+      setAnim(true);
+      Animated.timing(rowTranslateAnimatedValues[key], {
+        toValue: 200,
+        duration: 0,
+        useNativeDriver: false
+      }).start(() => {
+        let newData = [...dataState];
+        newData = newData.filter((a: any) => {
+          let iid = a.id;
+          return iid !== key;
+        });
+        dispatch({ type: 'CHANGE_PLANS', data: newData });
+        setData(newData);
+        setAnim(false);
+      });
+    }
+  };
 
   const renderItem = ({ item }: any) => {
-    const onPress = (item: any) => {
-      // item.isEnbled = !item.isEnbled;
-      // let res = item;
-      // setData([...dataState, res]);
+    const onPress = () => {
+      let res = dataState;
+      let objIndex = res.findIndex(((obj: any) => obj.id === item.id));
+      let temp = Object.assign(item, { isEnabled: !item.isEnabled });
+      res = res.map((item, index) => index === objIndex ? temp : item);
+      setData(res);
+      dispatch({ type: 'CHANGE_PLANS', data: dataState });
     }
 
     return (
-      <Item
-        item={item}
-        onPress={onPress}
-      />
+      <Animated.View style={{
+        height: rowTranslateAnimatedValues[item.id].interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 50],
+        })
+      }}>
+        <SwipeRow onSwipeValueChange={({ isOpen, direction, value }) => {
+          let key = item.id;
+          onSwipeValueChange({ isOpen, direction, value, key })
+        }} rightOpenValue={-65} disableRightSwipe={true}>
+          <View style={{ backgroundColor: "#b32400", paddingHorizontal: "2%", flexDirection: "row-reverse", height: "100%", alignItems: "center" }}>
+            <Text style={{ color: "white" }}>Delete</Text>
+          </View>
+          <Item
+            item={item}
+            onPress={onPress}
+          />
+        </SwipeRow>
+      </Animated.View>
     );
   }
 
-  if (!isLoading) return (
+  return (
     <View style={styles.modalContainer}>
       <View style={styles.header}>
         <View style={{ flexDirection: "row" }}>
@@ -157,11 +212,6 @@ const ListPlan = (props: any) => {
       </View>
     </View>
   );
-  else return (
-    <View style={{ backgroundColor: "#000", flex: 1 }}>
-      <ActivityIndicator size="large" color="#fff" style={{ flex: 1 }} />
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
@@ -175,6 +225,7 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   element: {
+    backgroundColor: "#4F4F4F",
     borderBottomWidth: 0.5,
     borderColor: "rgba(0, 0, 0, 0.2)",
     width: "100%",

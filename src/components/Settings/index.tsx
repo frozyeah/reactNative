@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text, TouchableOpacity, FlatList, useColorScheme } from 'react-native';
+import { useDispatch } from 'react-redux';
 import ToggleSwitch from '../ToggleSwitch';
 import MainHeader from './MainHeader';
 import { getData, storeData } from "../../actions/asyncStorage";
@@ -47,6 +48,18 @@ const DATA = [
   }
 ]
 
+const nightColors = {
+  home: {
+    backgroundColor: "black"
+  }
+}
+
+const dayColors = {
+  home: {
+    backgroundColor: "#fff"
+  }
+}
+
 const Item = (props: any) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style]} onPressOut={props.onPress}>
     <View style={{flexDirection: "row", justifyContent:"center"}}>
@@ -75,15 +88,20 @@ const Settings = (props: any) => {
   const [switchValue, setSwitch] = useState(true);
   const [isLoading, setLoading] = useState(true);
 
+  const dispatch = useDispatch();
+
   if(isLoading) getData('@theme').then((value) => {
     if(value !== undefined){
-      console.log(value);
       setSwitch((value === 'true'));
       setLoading(false);
     } else {
       setSwitch((useColorScheme() === "dark"));
     }
   })
+
+  let mode: any;
+  if (switchValue) mode = nightColors;
+  else mode = dayColors;
 
   useEffect(()=>{
     return function cleanup(){
@@ -99,6 +117,7 @@ const Settings = (props: any) => {
 
     if(item.hasSwitch){
       onPress = () => {
+        dispatch({type:'CHANGE_MODE', data: !switchValue});
         setSwitch(!switchValue)
       };
     } else {
@@ -119,8 +138,8 @@ const Settings = (props: any) => {
   };
 
   if(!isLoading) return (
-    <View style={styles.container}>
-      <MainHeader nav={props.navigation}/>
+    <View style={[styles.container, mode.home]}>
+      <MainHeader theme={switchValue} nav={props.navigation}/>
       <View style={{flex:8.7}}>
         <FlatList
           data={DATA}
@@ -141,7 +160,7 @@ const Settings = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor:"#000000",
+    // backgroundColor:"#000000",
   },
   font: {
     fontFamily: "Gilroy"

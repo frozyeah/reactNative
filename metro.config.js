@@ -3,7 +3,7 @@ const { getDefaultConfig } = require("@expo/metro-config");
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts }
-  } = await getDefaultConfig(__dirname);
+  } = await getDefaultConfig(__dirname)
   return {
     transformer: {
       assetPlugins: ['expo-asset/tools/hashAssetFiles'],
@@ -11,7 +11,7 @@ module.exports = (async () => {
     },
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),
-      sourceExts: [...sourceExts, "svg"]
+      sourceExts: [...sourceExts, "svg", "ttf"]
     }
   };
 })();
