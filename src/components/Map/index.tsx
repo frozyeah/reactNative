@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, Image } from 'react-native';
-import MapIcon from "../../../assets/svg/map.svg";
-import Back from "../../../assets/svg/back.svg";
+
+import MapIconNight from "../../../assets/svg/night/map.svg";
+import MapIconDay from "../../../assets/svg/day/map.svg";
+
+import BackNight from "../../../assets/svg/night/back.svg";
+import BackDay from "../../../assets/svg/day/back.svg";
+
 import Plan from "../../../assets/svg/plan.svg";
 import Reset from "../../../assets/svg/reset.svg";
 import EditMap from "../../../assets/svg/editMap.svg";
@@ -9,31 +14,32 @@ import Close from "../../../assets/svg/closeplan.svg";
 
 const Map = (props: any) => {
   const [modalVisible, setVisible] = useState(false);
+  let theme = props.theme;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.back]}>
       <View style={styles.content}>
         <View style={styles.head}>
-          <MapIcon />
-          <Text style={[styles.text]}>
+          {theme.theme ? <MapIconNight /> : <MapIconDay />}
+          <Text style={[styles.text, theme.text]}>
             Карта уборки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
           <View style={styles.open}>
-            <Back width={17} height={17} />
+            {theme.theme ? <BackNight width={17} height={17} /> : <BackDay width={17} height={17} />}
           </View>
         </TouchableOpacity>
       </View>
       <Modal animationType="fade"
-      transparent={true}
-      visible={modalVisible}>
-        <View style={{backgroundColor:"rgba(38,38,38,0.6)", width:"100%", height:"100%", alignSelf:"center"}}>
+        transparent={true}
+        visible={modalVisible}>
+        <View style={{ backgroundColor: "rgba(38,38,38,0.6)", width: "100%", height: "100%", alignSelf: "center" }}>
           <View style={styles.modalContainer}>
             <View style={styles.header}>
-              <View style={{flexDirection:"row"}}>
-                <MapIcon style={{marginRight:"4%", alignSelf:"center"}} />
-                <Text style={{fontSize:21.96, color: "#fff", alignSelf:"center", justifyContent:"flex-start", fontFamily: "Gilroy"}}>
+              <View style={{ flexDirection: "row" }}>
+                {theme.theme ? <MapIconNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <MapIconDay style={{ marginRight: "4%", alignSelf: "center" }} />}
+                <Text style={{ fontSize: 21.96, color: "#fff", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
                   Карта уборки
                 </Text>
               </View>
@@ -43,15 +49,15 @@ const Map = (props: any) => {
                 </View>
               </TouchableOpacity>
             </View>
-            <Plan style={{alignSelf:"center"}}/>
-            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
-              <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#59A1F6", marginRight:"5%"}]}>
+            <Plan style={{ alignSelf: "center" }} />
+            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+              <TouchableOpacity activeOpacity={0.7} style={[styles.button, { backgroundColor: "#59A1F6", marginRight: "5%" }]}>
                 <Reset />
-                <Text style={{color: "#fff", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Reset Map</Text>
+                <Text style={{ color: "#fff", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy" }}>Reset Map</Text>
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.7} style={[styles.button, {backgroundColor:"#fff"}]}>
+              <TouchableOpacity activeOpacity={0.7} style={[styles.button, { backgroundColor: "#fff" }]}>
                 <EditMap />
-                <Text style={{color: "#418FED", fontSize: 14.64, alignSelf:"center", fontFamily: "Gilroy"}}>Edit Map</Text>
+                <Text style={{ color: "#418FED", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy" }}>Edit Map</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -66,35 +72,34 @@ const styles = StyleSheet.create({
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "2%",
-    justifyContent:"center",
-    backgroundColor:"#252525",
+    justifyContent: "center",
     flex: 1,
     borderRadius: 20,
   },
   modalContainer: {
-    height:"73.6%",
-    backgroundColor:"#4F4F4F",
-    marginTop:"21.8%",
+    height: "73.6%",
+    backgroundColor: "#4F4F4F",
+    marginTop: "21.8%",
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "2%",
     borderRadius: 20,
-    justifyContent:"space-between",
+    justifyContent: "space-between",
   },
-  content:{
-    justifyContent:"space-between",
-    flexDirection:"row",
+  content: {
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignContent: "center",
-    alignItems:"center",
+    alignItems: "center",
   },
-  head:{
+  head: {
     marginHorizontal: "5%",
     flexDirection: "row",
     alignItems: "center"
   },
   open: {
-    alignSelf:"flex-end",
-    alignContent:"center",
+    alignSelf: "flex-end",
+    alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
     // marginTop: "5%",
@@ -113,27 +118,26 @@ const styles = StyleSheet.create({
     width: 40,
     borderRadius: 20,
   },
-  header:{
+  header: {
     marginTop: "3%",
     marginBottom: "3%",
-    marginHorizontal:"5%",
+    marginHorizontal: "5%",
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
   },
   text: {
     marginLeft: "6%",
-    color: "white",
     fontSize: 21.96,
     fontFamily: "Gilroy"
   },
-  button:{
+  button: {
     // paddingVertical:"6%",
     marginBottom: "2%",
     // marginTop:"14.5%",
     alignItems: "center",
     alignSelf: "center",
-    justifyContent:"center",
+    justifyContent: "center",
     borderRadius: 10,
     height: "40%",
     width: "27.15%"

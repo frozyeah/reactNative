@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
 import RechargeIcon from "../../../assets/svg/recharge.svg";
-import Close from "../../../assets/svg/close.svg";
+
+import CloseNight from "../../../assets/svg/night/close.svg";
+import CloseDay from "../../../assets/svg/day/close.svg";
+
+import BatteryNight from "../../../assets/svg/night/low-battery.svg";
+import BatteryDay from "../../../assets/svg/day/low-battery.svg";
 
 const BatteryButton = (props: any) => {
   const [modalVisible, setVisible] = useState(false);
+  let modal = props.modal;
 
   return (
     <TouchableOpacity activeOpacity={0.7} style={styles.container} onPressOut={() => {
@@ -14,16 +20,18 @@ const BatteryButton = (props: any) => {
       <Modal animationType="fade"
         transparent={true}
         visible={modalVisible}>
-        <View style={{ backgroundColor: "rgba(38,38,38,0.6)", width: "100%", height: "100%", alignSelf: "center" }}>
-          <View style={{ height: "55.8%", backgroundColor: "#4F4F4F", marginTop: "21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent: "space-around" }}>
+        <View style={[{ width: "100%", height: "100%", alignSelf: "center" }, modal.blur]}>
+          <View style={[{ height: "55.8%", marginTop: "21.8%", marginLeft: "8%", marginRight: "8%", marginBottom: "2%", borderRadius: 20, justifyContent: "space-around" }, modal.back]}>
             <View style={styles.header}>
-              <View style={{ flexDirection: "row" }}>
-                <Image source={require("../../../assets/img/low-battery.png")} style={{ resizeMode: "contain", flex: 0.35, marginRight: "2%" }} />
-                <Text style={{ fontSize: 21.96, color: "#fff", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>Уровень заряда</Text>
+              <View style={{ flexDirection: "row", alignItems: "center", paddingLeft: "4%" }}>
+                {props.theme ? <BatteryNight height={25} width={25} /> : <BatteryDay height={25} width={25} />}
+                <Text style={[{ fontSize: 21.96, alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy", paddingLeft: "2%" }, modal.text]}>
+                  Уровень заряда
+                </Text>
               </View>
               <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                 <View style={styles.close}>
-                  <Close width={17} height={17} />
+                  {props.theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
                 </View>
               </TouchableOpacity>
             </View>
@@ -32,7 +40,7 @@ const BatteryButton = (props: any) => {
                 33%
               </Text>
             </TouchableOpacity>
-            <Text style={{ color: "white", fontSize: 15.86, alignSelf: "center", fontFamily: "Gilroy" }}>
+            <Text style={[{ fontSize: 15.86, alignSelf: "center", fontFamily: "Gilroy" }, modal.text]}>
               Заряда хватит на 1 час и 27 минут
             </Text>
             <TouchableOpacity activeOpacity={0.7} style={styles.recharge}>
@@ -44,10 +52,11 @@ const BatteryButton = (props: any) => {
       </Modal>
 
 
-      <View style={styles.button}>
-        <Image source={require("../../../assets/img/low-battery.png")} style={{ marginTop: "25%", height: "50%", width: "50%", alignSelf: "center" }} />
+      <View style={[styles.button, props.circles]}>
+        {props.theme ? <BatteryNight height={25} width={25} /> : <BatteryDay height={25} width={25} />}
       </View>
-
+      {/* <Image source={require("../../../assets/img/low-battery.png")} style={{ resizeMode: "contain", flex: 0.35, marginRight: "2%" }} /> */}
+      {/* <Image source={require("../../../assets/img/low-battery.png")} style={{ marginTop: "25%", height: "50%", width: "50%", alignSelf: "center" }} /> */}
     </TouchableOpacity>
   );
 }
@@ -57,9 +66,10 @@ const styles = StyleSheet.create({
     marginRight: "5%"
   },
   button: {
-    backgroundColor: "#212121",
     height: 55,
     width: 55,
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 27.5,
   },
   recharge: {
@@ -82,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 27.5,
   },
   header: {
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
   }

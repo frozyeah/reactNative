@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, StatusBar } from 'react-native';
-import ModeIcon from "../../../assets/svg/mode.svg";
+
+import ModeIconNight from "../../../assets/svg/night/mode.svg";
+import ModeIconDay from "../../../assets/svg/day/mode.svg";
+
 import Auto from "../../../assets/svg/auto.svg";
 import Edge from "../../../assets/svg/edge.svg";
 import Spot from "../../../assets/svg/spot.svg";
@@ -32,7 +35,7 @@ const DATA = [
 const Item = ({ item, onPress, style, textStyle }: any) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
     <item.Icon />
-    <Text style={[textStyle, {fontFamily: "Gilroy"}]}>
+    <Text style={[textStyle, { fontFamily: "Gilroy" }]}>
       {item.title}
     </Text>
   </TouchableOpacity>
@@ -40,9 +43,10 @@ const Item = ({ item, onPress, style, textStyle }: any) => (
 
 const Mode = (props: any) => {
   const [selectedId, setSelectedId] = useState("1");
+  let theme = props.theme;
 
   const renderItem = ({ item }: any) => {
-    const backgroundColor = item.id === selectedId ? "#3F8EEC" : "#4F4F4F";
+    const backgroundColor = item.id === selectedId ? "#3F8EEC" : theme.radio;
     const color = item.id === selectedId ? "#fff" : "#418FED";
     return (
       <Item
@@ -53,13 +57,13 @@ const Mode = (props: any) => {
       />
     );
   };
-  
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.back]}>
       <View style={styles.head}>
-        <ModeIcon />
-        <Text style={styles.text}>
-          Режим уборки
+        {theme.theme ? <ModeIconNight /> : <ModeIconDay />}
+        <Text style={[styles.text, theme.text]}>
+            Режим уборки
         </Text>
       </View>
       <View style={styles.radioContainer}>
@@ -78,43 +82,41 @@ const Mode = (props: any) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      marginLeft: "8%",
-      marginRight: "8%",
-      marginBottom: "2%",
-      backgroundColor:"#252525",
-      flex: 2,
-      borderRadius: 20,
-      justifyContent: "space-between"
-    },
-    head:{
-      marginLeft: "5%",
-      marginTop: "4.7%",
-      flexDirection: "row",
-      alignItems: "center"
-    },
-    radioContainer:{
-      flexDirection: "row",
-      justifyContent: "space-around",
-      paddingBottom: "2%"
-    },
-    radio:{
-      alignItems:"center",
-      justifyContent: "center",
-      marginHorizontal: "2%",
-      borderRadius: 10,
-      width:65,
-      height:65
-    },    
-    text: {
-      marginLeft: "2%",
-      color: "white",
-      fontSize:21.96,
-      fontFamily: "Gilroy"
-    },
-    buttonText: {
-      color: "white"
-    }
+  container: {
+    marginLeft: "8%",
+    marginRight: "8%",
+    marginBottom: "2%",
+    flex: 2,
+    borderRadius: 20,
+    justifyContent: "space-between"
+  },
+  head: {
+    marginLeft: "5%",
+    marginTop: "4.7%",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  radioContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingBottom: "2%"
+  },
+  radio: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: "2%",
+    borderRadius: 10,
+    width: 65,
+    height: 65
+  },
+  text: {
+    marginLeft: "2%",
+    fontSize: 21.96,
+    fontFamily: "Gilroy"
+  },
+  buttonText: {
+    color: "white"
+  }
 });
 
 export default Mode;

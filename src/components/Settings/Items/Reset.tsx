@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import SubHeader from '../SubHeader';
+import { getMode } from "../../../redux/actions";
+import { useSelector } from 'react-redux';
 
 const Reset = (props: any) => {
+
+  const theme = useSelector(getMode);
+
   return (
-    <View style={styles.container}>
-      <SubHeader nav={props.navigation} />
+    <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
+      <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7 }}>
         <View style={styles.head}>
-          <Text style={{ fontSize: 19.96, color: "white", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 19.96, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
             Сброс настроек
-                    </Text>
+          </Text>
         </View>
         <View style={{ flex: 10, alignContent: "center", alignSelf: "center" }}>
-          <Text style={{ fontSize: 14.96, color: "rgba(255, 255, 255, 0.6)", fontFamily: "Gilroy", paddingHorizontal: "7%", paddingTop: "5%" }}>
+          <Text style={{ fontSize: 14.96, color: theme ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)", fontFamily: "Gilroy", paddingHorizontal: "7%", paddingTop: "5%" }}>
             Вы уверенны, что хотите сбросить настройки к начальным? Ваши данные будут сброшены.
-                    </Text>
+          </Text>
           <TouchableOpacity activeOpacity={0.7} style={{
             width: "75%", height: "8%", backgroundColor: "#59A1F6", justifyContent: "center",
             borderRadius: 10, alignSelf: "center", paddingHorizontal: "5%", marginTop: "10%"

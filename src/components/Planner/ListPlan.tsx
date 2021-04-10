@@ -115,8 +115,6 @@ const ListPlan = (props: any) => {
   const [animationIsRunning, setAnim] = useState(false);
   const rowTranslateAnimatedValues: any = {};
 
-  console.log(dataState)
-
   // storeData('@planner', JSON.stringify(DATA));
   if (dataState !== undefined) {
     dataState.forEach((item: any) => {
@@ -132,7 +130,7 @@ const ListPlan = (props: any) => {
 
   const onSwipeValueChange = (swipeData: any) => {
     const { key, value } = swipeData;
-    if (value < -65 && !animationIsRunning) {
+    if (value < -105 && !animationIsRunning) {
       setAnim(true);
       Animated.timing(rowTranslateAnimatedValues[key], {
         toValue: 200,
@@ -163,10 +161,6 @@ const ListPlan = (props: any) => {
 
     return (
       <Animated.View style={{
-        height: rowTranslateAnimatedValues[item.id].interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 50],
-        })
       }}>
         <SwipeRow onSwipeValueChange={({ isOpen, direction, value }) => {
           let key = item.id;
@@ -201,6 +195,10 @@ const ListPlan = (props: any) => {
       </View>
       <View style={styles.list}>
         <FlatList
+          style={{
+            borderBottomWidth: 0.5,
+            borderColor: "rgba(0, 0, 0, 0.2)"
+          }}
           data={dataState}
           renderItem={renderItem}
           ListHeaderComponent={View}
@@ -243,15 +241,15 @@ const styles = StyleSheet.create({
   head: {
     marginHorizontal: "5%",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   button: {
     alignSelf: "center",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
-    width: "20%",
-    height: "15%",
+    width: 65,
+    height: 65,
     marginVertical: "3%",
   },
   header: {
@@ -263,12 +261,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   list: {
-    flex: 1,
+    maxHeight: "85%",
     justifyContent: "center",
     paddingTop: "5%",
     alignContent: "flex-start",
     alignSelf: "flex-start",
-    width: "100%"
+    width: "100%",
   },
   modalContainer: {
     height: "80.6%",

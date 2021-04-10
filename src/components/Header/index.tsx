@@ -4,22 +4,25 @@ import BatteryButton from "./BatteryButton";
 import SettingsButton from "./SettingsButton";
 
 const Header = (props: any) => {
+  console.log(props.theme)
+  let theme = props.theme;
+  
   return (
     <View style={styles.container}>
       <View style={styles.left}>
       <TouchableOpacity activeOpacity={0.7}>
-        <View style={styles.avatar}>
+        <View style={[styles.avatar, theme.circles]}>
           <Image source={require("../../../assets/img/avatar.png")} style={{height:"100%", width:"100%", alignSelf:"center"}} />
         </View>
         </TouchableOpacity>
         <View style={styles.text}>
-          <Text style={[{fontSize: 13.42, color:"rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy"}]}>Hello</Text>
-          <Text style={[{fontSize: 15.86, color:"#fff", fontFamily: "Gilroy"}]}>Nick Korzh</Text>
+          <Text style={[{fontSize: 13.42, color:"rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy"}, theme.topText]}>Hello</Text>
+          <Text style={[{fontSize: 15.86, fontFamily: "Gilroy"}, theme.bottomText]}>Nick Korzh</Text>
         </View>
       </View>
       <View style={styles.right}>
-        <BatteryButton text={props.text}/>
-        <SettingsButton nav={props.nav}/>
+        <BatteryButton circles={theme.circles} modal={theme} theme={theme.theme} text={props.text}/>
+        <SettingsButton circles={theme.circles} theme={theme.theme} nav={props.nav}/>
       </View>
     </View>
   );
@@ -37,7 +40,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   avatar: {
-    backgroundColor: "#212121",
     height: 55,
     width: 55,
     borderRadius: 27.5,

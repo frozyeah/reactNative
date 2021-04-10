@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
 import CreatePlan from "./CreatePlan";
 import ListPlan from "./ListPlan";
-import PlannerMode from "../../../assets/svg/planner.svg";
-import Back from "../../../assets/svg/back.svg";
+
+import PlannerModeNight from "../../../assets/svg/night/planner.svg";
+import PlannerModeDay from "../../../assets/svg/day/planner.svg";
+
+import BackNight from "../../../assets/svg/night/back.svg";
+import BackDay from "../../../assets/svg/day/back.svg";
+
 import { getData, storeData } from "../../actions/asyncStorage";
 import { getPlans } from "../../redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
-
 
 
 const Planner = (props: any) => {
@@ -17,14 +21,16 @@ const Planner = (props: any) => {
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    console.log(dataState);
+  let theme = props.theme;
+
+  useEffect(() => {
+
   }, [dataState])
 
   if (isLoading) getData('@planner').then((value: any) => {
     if (value !== undefined) {
       setData(JSON.parse(value));
-      dispatch({type:'CHANGE_PLANS', data: dataState});
+      dispatch({ type: 'CHANGE_PLANS', data: dataState });
       setLoading(false);
     }
     return;
@@ -32,17 +38,17 @@ const Planner = (props: any) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, theme.back]}>
       <View style={styles.content}>
         <View style={styles.head}>
-          <PlannerMode />
-          <Text style={styles.text}>
+          {theme.theme ? <PlannerModeNight /> : <PlannerModeDay />}
+          <Text style={[styles.text, theme.text]}>
             Планирование уборки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} style={{}} onPressOut={() => setVisible(!modalVisible)}>
           <View style={styles.open}>
-            <Back width={17} height={17} />
+            {theme.theme ? <BackNight width={17} height={17} /> : <BackDay width={17} height={17} />}
           </View>
         </TouchableOpacity>
       </View>
@@ -66,7 +72,6 @@ const styles = StyleSheet.create({
     marginRight: "8%",
     marginBottom: "5%",
     justifyContent: "center",
-    backgroundColor: "#252525",
     flex: 1,
     borderRadius: 20
   },
@@ -145,7 +150,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: "4%",
-    color: "white",
     fontSize: 21.96,
     fontFamily: "Gilroy"
   }

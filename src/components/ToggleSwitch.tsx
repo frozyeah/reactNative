@@ -32,11 +32,11 @@ const ToggleSwitch = (props: Props) => {
 
   const color = isOn ? onColor : offColor;
 
-  animatedValue.setValue(isOn ? 0 : 1);
+  // animatedValue.setValue(isOn ? 0 : 1);
 
   Animated.timing(animatedValue, {
     toValue: isOn ? 1 : 0,
-    duration: 300,
+    duration: 0,
     easing: Easing.linear,
     useNativeDriver: false
   }).start();

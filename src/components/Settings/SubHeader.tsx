@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, StatusBar } from 'react-native';
-import Home from "../../../assets/svg/home.svg";
-import Back from "../../../assets/svg/left-arrow.svg";
+
+import HomeNight from "../../../assets/svg/night/home.svg";
+import HomeDay from "../../../assets/svg/day/home.svg";
+
+import BackNight from "../../../assets/svg/night/left-arrow.svg";
+import BackDay from "../../../assets/svg/day/left-arrow.svg";
+
+
 
 const SubHeader = (props: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
         <TouchableOpacity activeOpacity={0.7} onPressOut={() => props.nav.navigate('Settings')}>
-          <View style={styles.back}>
-            <Back height={24} width={24} style={{ height: "100%", width: "100%", alignSelf: "center" }} />
+          <View style={[styles.back, {backgroundColor: props.theme ? "#212121" : "#F8F8F8"}]}>
+            {props.theme ? <BackNight height={24} width={24} style={{ height: "100%", width: "100%", alignSelf: "center" }} /> :
+              <BackDay height={24} width={24} style={{ height: "100%", width: "100%", alignSelf: "center" }} />}
           </View>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.right} onPressOut={() => props.nav.navigate('MainScreen')}>
-        <Home height={25} width={25} />
+      <TouchableOpacity activeOpacity={0.7} style={[styles.right, {backgroundColor: props.theme ? "#212121" : "#F8F8F8"}]} onPressOut={() => props.nav.navigate('MainScreen')}>
+        {props.theme ? <HomeNight height={25} width={25} /> : <HomeDay height={25} width={25} />}
       </TouchableOpacity>
     </View>
   );
@@ -32,7 +39,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   back: {
-    backgroundColor: "#212121",
     height: 55,
     width: 55,
     borderRadius: 27.5,
@@ -62,7 +68,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   right: {
-    backgroundColor: "#212121",
     height: 55,
     width: 55,
     borderRadius: 27.5,

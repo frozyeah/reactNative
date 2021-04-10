@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Image, Text, FlatList, TouchableOpacity } from 'react-native';
 import SubHeader from '../SubHeader';
+import { getMode } from "../../../redux/actions";
+import { useSelector } from 'react-redux';
 
 const DATA = [
   {
@@ -29,13 +31,13 @@ const DATA = [
   }
 ]
 
-const Item = (item: any) => (
+const Item = (item: any, theme: boolean) => (
   <TouchableOpacity activeOpacity={0.7} style={styles.element}>
     <View style={{ flexDirection: "column" }}>
-      <Text style={{ color: "white", fontSize: 20, fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy" }}>
         {item.title}
       </Text>
-      <Text style={{ color: "rgba(255,255,255,0.5)", fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontFamily: "Gilroy" }}>
         {item.bottomText}
       </Text>
     </View>
@@ -48,14 +50,16 @@ const Item = (item: any) => (
 );
 
 const ManageVacuum = (props: any) => {
+  const theme = useSelector(getMode);
+
   return (
-    <View style={styles.container}>
-      <SubHeader nav={props.navigation} />
+    <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
+      <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7, justifyContent: "flex-start" }}>
         <View style={styles.head}>
-          <Text style={{ fontSize: 19.96, color: "white", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 19.96, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
             Управление роботом-пылесосом
-                    </Text>
+          </Text>
         </View>
         <View style={{ alignItems: "flex-start", flex: 5 }}>
           <Image source={require("../../../../assets/img/vacuum-print.png")} style={{ width: 328, height: 234, alignSelf: "center" }} />
@@ -63,7 +67,7 @@ const ManageVacuum = (props: any) => {
         <View style={{ alignSelf: "flex-start", flex: 7 }}>
           <FlatList
             data={DATA}
-            renderItem={({ item }) => Item(item)}
+            renderItem={({ item }) => Item(item, theme)}
             ListHeaderComponent={View}
             ListHeaderComponentStyle={{ borderBottomWidth: 0.5, borderColor: "#4F4F4F" }}
           />
@@ -76,7 +80,6 @@ const ManageVacuum = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
   },
   element: {
     justifyContent: "space-between",

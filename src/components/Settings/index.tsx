@@ -1,48 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text, TouchableOpacity, FlatList, useColorScheme } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ToggleSwitch from '../ToggleSwitch';
 import MainHeader from './MainHeader';
+import { getMode } from "../../redux/actions";
 import { getData, storeData } from "../../actions/asyncStorage";
-import Moon from "../../../assets/svg/moon.svg";
-import Manage from "../../../assets/svg/settings.svg";
-import Info from  "../../../assets/svg/information.svg";
-import Update from "../../../assets/svg/up-arrow.svg";
-import Reset from "../../../assets/svg/reset.svg";
+
+import MoonNight from "../../../assets/svg/night/moon.svg";
+import MoonDay from "../../../assets/svg/day/moon.svg";
+
+import ManageNight from "../../../assets/svg/night/settings.svg";
+import ManageDay from "../../../assets/svg/day/settings.svg";
+
+import InfoNight from  "../../../assets/svg/night/information.svg";
+import InfoDay from  "../../../assets/svg/day/information.svg";
+
+import UpdateNight from "../../../assets/svg/night/up-arrow.svg";
+import UpdateDay from "../../../assets/svg/day/up-arrow.svg";
+
+import ResetNight from "../../../assets/svg/night/refresh.svg";
+import ResetDay from "../../../assets/svg/day/refresh.svg";
 
 const DATA = [
   {
     id: "1",
     title: "Ночной режим",
-    icon: Moon,
+    nIcon: MoonNight,
+    dIcon: MoonDay,
     hasSwitch: true,
     navigationLoc: false
   },
   {
     id: "2",
     title: "Управление роботом-пылесос...",
-    icon: Manage,
+    nIcon: ManageNight,
+    dIcon: ManageDay,
     hasSwitch: false,
     navigationLoc: 'ManageVacuum'
   },
   {
     id: "3",
     title: "Информация",
-    icon: Info,
+    nIcon: InfoNight,
+    dIcon: InfoDay,
     hasSwitch: false,
     navigationLoc: 'Info'
   },
   {
     id: "4",
     title: "Обновление прошивки",
-    icon: Update,
+    nIcon: UpdateNight,
+    dIcon: UpdateDay,
     hasSwitch: false,
     navigationLoc: 'Update'
   },
   {
     id: "5",
     title: "Сброс настроек",
-    icon: Reset,
+    nIcon: ResetNight,
+    dIcon: ResetDay,
     hasSwitch: false,
     navigationLoc: 'Reset'
   }
@@ -63,8 +79,8 @@ const dayColors = {
 const Item = (props: any) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style]} onPressOut={props.onPress}>
     <View style={{flexDirection: "row", justifyContent:"center"}}>
-      <props.item.icon style={{alignSelf: "center"}} />
-      <Text style={[styles.font, {color:"white", fontSize:20, paddingLeft: "2%"}]}>
+      {props.isEnabled ? <props.item.nIcon style={{alignSelf: "center"}} /> : <props.item.dIcon style={{alignSelf: "center"}} />}
+      <Text style={[styles.font, {color: props.isEnabled ? "white" : "black", fontSize:20, paddingLeft: "2%"}]}>
         {props.item.title}
       </Text>
     </View>
@@ -85,19 +101,11 @@ const Item = (props: any) => (
 );
 
 const Settings = (props: any) => {
-  const [switchValue, setSwitch] = useState(true);
-  const [isLoading, setLoading] = useState(true);
+  const [switchValue, setSwitch] = useState(useSelector(getMode));
+  const [isLoading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  if(isLoading) getData('@theme').then((value) => {
-    if(value !== undefined){
-      setSwitch((value === 'true'));
-      setLoading(false);
-    } else {
-      setSwitch((useColorScheme() === "dark"));
-    }
-  })
 
   let mode: any;
   if (switchValue) mode = nightColors;

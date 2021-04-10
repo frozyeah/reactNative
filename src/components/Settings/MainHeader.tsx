@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, StatusBar } from 'react-native';
-import Home from "../../../assets/svg/home.svg";
-import Edit from "../../../assets/svg/pen.svg";
+
+import HomeNight from "../../../assets/svg/night/home.svg";
+import HomeDay from "../../../assets/svg/day/home.svg";
+
+import EditNight from "../../../assets/svg/night/pen.svg";
+import EditDay from "../../../assets/svg/day/pen.svg";
 
 const nightColors = {
   font: {
@@ -39,12 +43,12 @@ const MainHeader = (props: any) => {
         </View>
         <View style={{ justifyContent: "center" }} >
           <TouchableOpacity style={[styles.edit, mode.circles]} activeOpacity={0.7}>
-            <Edit style={{ height: "100%", width: "100%", alignSelf: "center" }} />
+            {props.theme ? <EditNight style={{ height: "100%", width: "100%", alignSelf: "center" }} /> : <EditDay style={{ height: "100%", width: "100%", alignSelf: "center" }} />}
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity activeOpacity={0.7} style={[styles.right, mode.circles]} onPressOut={() => props.nav.navigate('MainScreen')}>
-        <Home height={25} width={25} />
+        {props.theme ? <HomeNight height={25} width={25} /> : <HomeDay height={25} width={25} />}
       </TouchableOpacity>
     </View>
   );
