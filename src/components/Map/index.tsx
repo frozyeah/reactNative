@@ -7,10 +7,14 @@ import MapIconDay from "../../../assets/svg/day/map.svg";
 import BackNight from "../../../assets/svg/night/back.svg";
 import BackDay from "../../../assets/svg/day/back.svg";
 
-import Plan from "../../../assets/svg/plan.svg";
+import PlanNight from "../../../assets/svg/night/plan.svg";
+import PlanDay from "../../../assets/svg/day/plan.svg";
+
 import Reset from "../../../assets/svg/reset.svg";
 import EditMap from "../../../assets/svg/editMap.svg";
-import Close from "../../../assets/svg/closeplan.svg";
+
+import CloseNight from "../../../assets/svg/night/closeplan.svg";
+import CloseDay from "../../../assets/svg/day/closeplan.svg";
 
 const Map = (props: any) => {
   const [modalVisible, setVisible] = useState(false);
@@ -34,22 +38,22 @@ const Map = (props: any) => {
       <Modal animationType="fade"
         transparent={true}
         visible={modalVisible}>
-        <View style={{ backgroundColor: "rgba(38,38,38,0.6)", width: "100%", height: "100%", alignSelf: "center" }}>
-          <View style={styles.modalContainer}>
+        <View style={{ backgroundColor: theme.theme ? "rgba(38,38,38,0.6)" : "rgba(248, 248, 248, 0.6)", width: "100%", height: "100%", alignSelf: "center" }}>
+          <View style={[styles.modalContainer, { backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
             <View style={styles.header}>
               <View style={{ flexDirection: "row" }}>
                 {theme.theme ? <MapIconNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <MapIconDay style={{ marginRight: "4%", alignSelf: "center" }} />}
-                <Text style={{ fontSize: 21.96, color: "#fff", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+                <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
                   Карта уборки
                 </Text>
               </View>
               <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                 <View style={styles.close}>
-                  <Close width={17} height={17} />
+                  {theme.theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
                 </View>
               </TouchableOpacity>
             </View>
-            <Plan style={{ alignSelf: "center" }} />
+            {theme.theme ? <PlanNight style={{ alignSelf: "center" }} /> : <PlanDay style={{ alignSelf: "center" }} />}
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button, { backgroundColor: "#59A1F6", marginRight: "5%" }]}>
                 <Reset />

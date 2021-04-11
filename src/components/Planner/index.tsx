@@ -56,10 +56,10 @@ const Planner = (props: any) => {
         transparent={true}
         visible={modalVisible}>
         <View style={{
-          backgroundColor: "rgba(38,38,38,0.6)", width: "100%", height: "100%",
+          backgroundColor: theme.theme ? "rgba(38,38,38,0.6)" : "rgba(248, 248, 248, 0.6)", width: "100%", height: "100%",
           alignSelf: "center", justifyContent: "flex-end"
         }}>
-          {isLoading ? (<View />) : (isList ? <ListPlan date={dataState} setList={() => setList(!isList)} closeModal={() => setVisible(!modalVisible)} /> : <CreatePlan date={dataState} onClose={() => setList(!isList)} />)}
+          {isLoading ? (<View />) : (isList ? <ListPlan date={dataState} theme={theme} setList={() => setList(!isList)} closeModal={() => setVisible(!modalVisible)} /> : <CreatePlan theme={theme} date={dataState} onClose={() => setList(!isList)} />)}
         </View>
       </Modal>
     </View>

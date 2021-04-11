@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Animated, ActivityIndicator, FlatList, Dimensions } from 'react-native';
 
 import { getData, storeData } from "../../actions/asyncStorage";
-import PlannerMode from "../../../assets/svg/planner.svg";
-import Close from "../../../assets/svg/closeplan.svg";
+
+import PlannerModeNight from "../../../assets/svg/night/planner.svg";
+import PlannerModeDay from "../../../assets/svg/day/planner.svg";
+
+import CloseNight from "../../../assets/svg/night/closeplan.svg";
+import CloseDay from "../../../assets/svg/day/closeplan.svg";
+
 import Plus from "../../../assets/svg/plus.svg";
 import ToggleSwitch from '../ToggleSwitch';
 
@@ -87,13 +92,13 @@ const DATA = [
 ]
 // onPress={() => onPress(item)}
 
-const Item = ({ item, onPress }: any) => (
-  <TouchableOpacity activeOpacity={1} style={styles.element}>
+const Item = ({ item, onPress, theme }: any) => (
+  <TouchableOpacity activeOpacity={1} style={[styles.element, { backgroundColor: theme ? "#4F4F4F" : "rgba(242, 242, 242, 1)" }]}>
     <View style={{ flexDirection: "column" }}>
-      <Text style={{ color: "white", fontSize: 25, fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "white" : "black", fontSize: 25, fontFamily: "Gilroy" }}>
         {item.hour + ":" + item.min}
       </Text>
-      <Text style={{ color: "rgba(255,255,255,0.4)", fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "rgba(255,255,255,0.4)" : "rgba(0, 0, 0, 0.4)", fontFamily: "Gilroy" }}>
         {item.mode + ", " + item.days + ", " + item.power}
       </Text>
     </View>
@@ -115,7 +120,8 @@ const ListPlan = (props: any) => {
   const [animationIsRunning, setAnim] = useState(false);
   const rowTranslateAnimatedValues: any = {};
 
-  // storeData('@planner', JSON.stringify(DATA));
+  const theme = props.theme;
+
   if (dataState !== undefined) {
     dataState.forEach((item: any) => {
       rowTranslateAnimatedValues[item.id] = new Animated.Value(1);
@@ -172,6 +178,7 @@ const ListPlan = (props: any) => {
           <Item
             item={item}
             onPress={onPress}
+            theme={theme.theme}
           />
         </SwipeRow>
       </Animated.View>
@@ -179,17 +186,17 @@ const ListPlan = (props: any) => {
   }
 
   return (
-    <View style={styles.modalContainer}>
+    <View style={[styles.modalContainer, { backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
       <View style={styles.header}>
         <View style={{ flexDirection: "row" }}>
-          <PlannerMode style={{ marginRight: "4%", alignSelf: "center" }} />
-          <Text style={{ fontSize: 21.96, color: "#fff", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+          {theme.theme ? <PlannerModeNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay style={{ marginRight: "4%", alignSelf: "center" }} />}
+          <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
             Планирование уборки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} onPressOut={props.closeModal}>
           <View style={styles.close}>
-            <Close width={17} height={17} />
+            {theme.theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
           </View>
         </TouchableOpacity>
       </View>
@@ -218,12 +225,10 @@ const styles = StyleSheet.create({
     marginRight: "8%",
     marginBottom: "5%",
     justifyContent: "center",
-    backgroundColor: "#252525",
     flex: 1,
     borderRadius: 20
   },
   element: {
-    backgroundColor: "#4F4F4F",
     borderBottomWidth: 0.5,
     borderColor: "rgba(0, 0, 0, 0.2)",
     width: "100%",
@@ -270,7 +275,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     height: "80.6%",
-    backgroundColor: "#4F4F4F",
     marginLeft: "8%",
     marginRight: "8%",
     marginBottom: "5%",

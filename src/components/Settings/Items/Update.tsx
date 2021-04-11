@@ -61,7 +61,7 @@ const Update = (props: any) => {
           transparent={true}
           visible={modalVisible}>
           <View style={{ backgroundColor: theme ? "rgba(38,38,38,0.6)" : "rgba(248, 248, 248, 0.6)", width: "100%", height: "100%", alignSelf: "center" }}>
-            <View style={[styles.modalContainer, { backgroundColor: "rgba(242, 242, 242, 1)" }]}>
+            <View style={[styles.modalContainer, { backgroundColor: theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
               <View style={styles.header}>
                 <View style={{ flexDirection: "row" }}>
                   <Text style={{ fontSize: 21.96, color: theme ? "white" : "black", alignSelf: "center", marginLeft: "7%", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
