@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal, Image } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import MapIconNight from "../../../assets/svg/night/map.svg";
 import MapIconDay from "../../../assets/svg/day/map.svg";
@@ -31,7 +32,7 @@ const Map = (props: any) => {
         </View>
         <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
           <View style={styles.open}>
-            {theme.theme ? <BackNight width={17} height={17} /> : <BackDay width={17} height={17} />}
+            {theme.theme ? <BackNight  /> : <BackDay />}
           </View>
         </TouchableOpacity>
       </View>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "2%",
+    marginBottom: vh(2.5),
     justifyContent: "center",
     flex: 1,
     borderRadius: 20,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   head: {
-    marginHorizontal: "5%",
+    paddingLeft: "5%",
     flexDirection: "row",
     alignItems: "center"
   },

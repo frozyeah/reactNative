@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 import BatteryButton from "./BatteryButton";
 import SettingsButton from "./SettingsButton";
 
@@ -21,8 +22,8 @@ const Header = (props: any) => {
         </View>
       </View>
       <View style={styles.right}>
-        <BatteryButton circles={theme.circles} modal={theme} theme={theme.theme} text={props.text}/>
-        <SettingsButton circles={theme.circles} theme={theme.theme} nav={props.nav}/>
+        <BatteryButton circles={theme.circles} modal={theme} theme={theme.theme} />
+        <SettingsButton circles={theme.circles} theme={theme.theme} nav={props.nav} />
       </View>
     </View>
   );
@@ -30,10 +31,10 @@ const Header = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBar.currentHeight,
+    paddingTop: vh(4.9),
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "2%",
+    marginBottom: vh(3.7),
     alignItems: "center",
     flex: 1,
     flexDirection: "row",
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   text:{
-    marginLeft: "3%",
+    marginLeft: vw(2.7),
     alignSelf: "center"
   },
   right: {

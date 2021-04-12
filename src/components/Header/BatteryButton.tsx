@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Modal } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
+
 import RechargeIcon from "../../../assets/svg/recharge.svg";
 
 import CloseNight from "../../../assets/svg/night/close.svg";
@@ -63,7 +65,7 @@ const BatteryButton = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginRight: "5%"
+    marginRight: vw(4)
   },
   button: {
     height: 55,

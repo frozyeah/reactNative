@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
+
 import CreatePlan from "./CreatePlan";
 import ListPlan from "./ListPlan";
 
 import PlannerModeNight from "../../../assets/svg/night/planner.svg";
 import PlannerModeDay from "../../../assets/svg/day/planner.svg";
-
 import BackNight from "../../../assets/svg/night/back.svg";
 import BackDay from "../../../assets/svg/day/back.svg";
 
-import { getData, storeData } from "../../actions/asyncStorage";
+import { getData } from "../../actions/asyncStorage";
 import { getPlans } from "../../redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -48,7 +49,7 @@ const Planner = (props: any) => {
         </View>
         <TouchableOpacity activeOpacity={0.7} style={{}} onPressOut={() => setVisible(!modalVisible)}>
           <View style={styles.open}>
-            {theme.theme ? <BackNight width={17} height={17} /> : <BackDay width={17} height={17} />}
+            {theme.theme ? <BackNight /> : <BackDay />}
           </View>
         </TouchableOpacity>
       </View>
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "5%",
+    marginBottom: vh(2.3),
     justifyContent: "center",
     flex: 1,
     borderRadius: 20
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   head: {
-    marginHorizontal: "5%",
+    paddingLeft: "5%",
     flexDirection: "row",
     alignItems: "center"
   },
@@ -132,7 +133,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
     alignItems: "center",
-    // marginTop: "5%",
     // backgroundColor: "#000",
     height: 40,
     width: 40,
@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginTop: "5%",
-    // backgroundColor: "#000",
     height: 40,
     width: 40,
     borderRadius: 20,

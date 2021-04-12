@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, StatusBar } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import ModeIconNight from "../../../assets/svg/night/mode.svg";
 import ModeIconDay from "../../../assets/svg/day/mode.svg";
@@ -66,7 +67,7 @@ const Mode = (props: any) => {
             Режим уборки
         </Text>
       </View>
-      <View style={styles.radioContainer}>
+      <View style={{alignItems:"center", alignSelf:"center", justifyContent:"center"}}>
         <FlatList
           scrollEnabled={false}
           numColumns={4}
@@ -85,29 +86,26 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "2%",
-    flex: 2,
+    marginBottom: vh(2.5),
+    flex: 2.1,
     borderRadius: 20,
-    justifyContent: "space-between"
   },
   head: {
     marginLeft: "5%",
-    marginTop: "4.7%",
+    marginTop: vh(2.4),
     flexDirection: "row",
     alignItems: "center"
   },
   radioContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingBottom: "2%"
+    justifyContent: "space-between"
   },
   radio: {
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: "2%",
     borderRadius: 10,
-    width: 65,
-    height: 65
+    width: 63,
+    height: 63
   },
   text: {
     marginLeft: "2%",

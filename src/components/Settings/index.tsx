@@ -5,6 +5,7 @@ import ToggleSwitch from '../ToggleSwitch';
 import MainHeader from './MainHeader';
 import { getMode } from "../../redux/actions";
 import { getData, storeData } from "../../actions/asyncStorage";
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import MoonNight from "../../../assets/svg/night/moon.svg";
 import MoonDay from "../../../assets/svg/day/moon.svg";
@@ -12,8 +13,8 @@ import MoonDay from "../../../assets/svg/day/moon.svg";
 import ManageNight from "../../../assets/svg/night/settings.svg";
 import ManageDay from "../../../assets/svg/day/settings.svg";
 
-import InfoNight from  "../../../assets/svg/night/information.svg";
-import InfoDay from  "../../../assets/svg/day/information.svg";
+import InfoNight from "../../../assets/svg/night/information.svg";
+import InfoDay from "../../../assets/svg/day/information.svg";
 
 import UpdateNight from "../../../assets/svg/night/up-arrow.svg";
 import UpdateDay from "../../../assets/svg/day/up-arrow.svg";
@@ -77,25 +78,25 @@ const dayColors = {
 }
 
 const Item = (props: any) => (
-  <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style]} onPressOut={props.onPress}>
-    <View style={{flexDirection: "row", justifyContent:"center"}}>
-      {props.isEnabled ? <props.item.nIcon style={{alignSelf: "center"}} /> : <props.item.dIcon style={{alignSelf: "center"}} />}
-      <Text style={[styles.font, {color: props.isEnabled ? "white" : "black", fontSize:20, paddingLeft: "2%"}]}>
+  <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style, { borderColor: props.isEnabled ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={props.onPress}>
+    <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      {props.isEnabled ? <props.item.nIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} /> : <props.item.dIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} />}
+      <Text style={[styles.font, { color: props.isEnabled ? "white" : "black", fontSize: 20, marginLeft: vw(2.7), alignSelf: "center" }]}>
         {props.item.title}
       </Text>
     </View>
     {!props.item.hasSwitch ? <View /> :
-    <View style={{justifyContent: "flex-end"}}>
-      <ToggleSwitch
-      isOn={props.isEnabled}
-      onToggle={props.onPress}
-      onColor='#4cd137'
-      offColor='rgba(120, 120, 128, 0.32)'
-      label=""
-      style={{}}
-      labelStyle={{}}
-      />
-    </View>
+      <View style={{ justifyContent: "flex-end", marginRight: vw(9.33) }}>
+        <ToggleSwitch
+          isOn={props.isEnabled}
+          onToggle={props.onPress}
+          onColor='#4cd137'
+          offColor='rgba(120, 120, 128, 0.32)'
+          label=""
+          style={{}}
+          labelStyle={{}}
+        />
+      </View>
     }
   </TouchableOpacity>
 );
@@ -111,8 +112,8 @@ const Settings = (props: any) => {
   if (switchValue) mode = nightColors;
   else mode = dayColors;
 
-  useEffect(()=>{
-    return function cleanup(){
+  useEffect(() => {
+    return function cleanup() {
       storeData('@theme', switchValue.toString());
     }
   }, [switchValue]);
@@ -123,9 +124,9 @@ const Settings = (props: any) => {
       // setSwitch(!switchValue)
     };
 
-    if(item.hasSwitch){
+    if (item.hasSwitch) {
       onPress = () => {
-        dispatch({type:'CHANGE_MODE', data: !switchValue});
+        dispatch({ type: 'CHANGE_MODE', data: !switchValue });
         setSwitch(!switchValue)
       };
     } else {
@@ -145,41 +146,41 @@ const Settings = (props: any) => {
     );
   };
 
-  if(!isLoading) return (
+  if (!isLoading) return (
     <View style={[styles.container, mode.home]}>
-      <MainHeader theme={switchValue} nav={props.navigation}/>
-      <View style={{flex:8.7}}>
+      <MainHeader theme={switchValue} nav={props.navigation} />
+      <View style={{ flex: 8.7 }}>
         <FlatList
           data={DATA}
-          renderItem={({item})=> renderItem(item)}
+          renderItem={({ item }) => renderItem(item)}
           ListHeaderComponent={View}
-          ListHeaderComponentStyle={{borderBottomWidth: 0.5, borderColor: "#4F4F4F"}}
+          ListHeaderComponentStyle={{ borderBottomWidth: 0.5, borderColor: switchValue ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }}
+          ListFooterComponent={View}
+          ListFooterComponentStyle={{ borderBottomWidth: 0.5, borderColor: switchValue ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }}
         />
       </View>
     </View>
   );
-  else return(
-    <View style={{backgroundColor:"#000", flex: 1}}>
-      <ActivityIndicator size="large" color="#fff" style={{flex:1}} />
+  else return (
+    <View style={{ backgroundColor: "#000", flex: 1 }}>
+      <ActivityIndicator size="large" color="#fff" style={{ flex: 1 }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     // backgroundColor:"#000000",
   },
   font: {
     fontFamily: "Gilroy"
   },
-  element:{
+  element: {
     borderBottomWidth: 0.5,
-    borderColor: "#4F4F4F",
     width: "100%",
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingHorizontal:"5%",
     paddingVertical: "4%"
   },
 })

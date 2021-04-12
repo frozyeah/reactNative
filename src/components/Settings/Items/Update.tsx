@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
 import SubHeader from '../SubHeader';
 import ToggleSwitch from '../../ToggleSwitch';
-import Close from "../../../../assets/svg/close.svg";
+
+import CloseNight from "../../../../assets/svg/night/close.svg";
+import CloseDay from "../../../../assets/svg/day/close.svg";
+
+
 import { getMode } from "../../../redux/actions";
 import { useSelector } from 'react-redux';
 
@@ -20,7 +24,7 @@ const Update = (props: any) => {
             Обновление прошивки
           </Text>
         </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.element} onPressOut={() => setValue(!switchValue)}>
+        <TouchableOpacity activeOpacity={0.7} style={[styles.element, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={() => setValue(!switchValue)}>
           <View style={{ flexDirection: "column" }}>
             <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy" }}>
               Автоматическое обновление
@@ -70,7 +74,7 @@ const Update = (props: any) => {
                 </View>
                 <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
                   <View style={[styles.close, { marginHorizontal: "5%" }]}>
-                    <Close width={17} height={17} />
+                    {theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
                   </View>
                 </TouchableOpacity>
               </View>
@@ -78,13 +82,13 @@ const Update = (props: any) => {
                 <Text style={{ color: theme ? "white" : "black", fontSize: 18, marginVertical: "4%", fontFamily: "Gilroy" }}>
                   Firmware version: 2.7.1
                 </Text>
-                <Text style={[styles.changes, {color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)"}]}>
+                <Text style={[styles.changes, { color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)" }]}>
                   Исправлены ошибки;
                 </Text>
-                <Text style={[styles.changes, {color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)"}]}>
+                <Text style={[styles.changes, { color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)" }]}>
                   Подзарядка устройства стала быстрее на 30 минут;
                 </Text>
-                <Text style={[styles.changes, {color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)"}]}>
+                <Text style={[styles.changes, { color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)" }]}>
                   Улучшено голосовое управление роботом.
                 </Text>
                 <TouchableOpacity onPressOut={() => setVisible(!modalVisible)} activeOpacity={0.7} style={{
@@ -145,13 +149,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    borderColor: "rgba(0, 0, 0, 0.2)",
     borderBottomWidth: 0.5,
+    borderColor: "rgba(0, 0, 0, 0.2)"
   },
   element: {
     borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
-    borderColor: "#4F4F4F",
     width: "100%",
     justifyContent: "space-between",
     alignContent: "center",

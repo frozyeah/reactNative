@@ -32,7 +32,7 @@ const DATA = [
 ]
 
 const Item = (item: any, theme: boolean) => (
-  <TouchableOpacity activeOpacity={0.7} style={styles.element}>
+  <TouchableOpacity activeOpacity={0.7} style={[styles.element, { backgroundColor: theme ? "black" : "white", borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
     <View style={{ flexDirection: "column" }}>
       <Text style={{ color: theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy" }}>
         {item.title}
@@ -56,7 +56,7 @@ const ManageVacuum = (props: any) => {
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7, justifyContent: "flex-start" }}>
-        <View style={styles.head}>
+        <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
           <Text style={{ fontSize: 19.96, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
             Управление роботом-пылесосом
           </Text>
@@ -69,7 +69,7 @@ const ManageVacuum = (props: any) => {
             data={DATA}
             renderItem={({ item }) => Item(item, theme)}
             ListHeaderComponent={View}
-            ListHeaderComponentStyle={{ borderBottomWidth: 0.5, borderColor: "#4F4F4F" }}
+            ListHeaderComponentStyle={{ borderBottomWidth: 0.5, borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }}
           />
         </View>
       </View>
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   element: {
     justifyContent: "space-between",
     borderBottomWidth: 0.5,
-    borderColor: "#4F4F4F",
     width: "100%",
     flexDirection: "row",
     paddingHorizontal: "4%",
@@ -94,7 +93,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     borderBottomWidth: 0.5,
-    borderColor: "#4F4F4F",
     width: "100%"
   }
 })

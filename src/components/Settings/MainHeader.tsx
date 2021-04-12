@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import HomeNight from "../../../assets/svg/night/home.svg";
 import HomeDay from "../../../assets/svg/day/home.svg";
@@ -56,10 +57,10 @@ const MainHeader = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBar.currentHeight,
+    paddingTop: vh(4.9),
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "2%",
+    marginBottom: vh(3.7),
     alignItems: "center",
     flex: 1,
     flexDirection: "row",

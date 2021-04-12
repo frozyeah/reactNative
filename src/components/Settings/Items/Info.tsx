@@ -13,7 +13,7 @@ const Info = (props: any) => {
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7 }}>
-        <View style={styles.head}>
+        <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
           <Text style={{ fontSize: 19.96, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
             Информация
           </Text>
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     borderBottomWidth: 0.5,
-    borderColor: "#4F4F4F",
     width: "100%"
   }
 })

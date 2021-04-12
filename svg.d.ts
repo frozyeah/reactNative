@@ -8,3 +8,11 @@ declare module "*.svg" {
 //     const content: React.FC<SvgProps>;
 //     export default content;
 //   }
+
+declare module 'react-native-expo-viewport-units' {
+    const vh: (n: number) => number;
+    const vw: (n: number) => number;
+    const vmin: (n: number) => number;
+    const vmax: (n: number) => number;
+    export {vh, vw, vmin, vmax};
+}
