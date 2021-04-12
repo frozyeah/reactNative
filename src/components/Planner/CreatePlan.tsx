@@ -82,6 +82,8 @@ const CreatePlan = (props: any) => {
         days = "выходные дни";
       } else if (days === "пн-вт-ср-чт-пт") {
         days = "будние дни";
+      } else if (days === "пн-вт-ср-чт-пт-сб-вс") {
+        days = "каждый день";
       }
 
       let newPlan = {
@@ -111,7 +113,7 @@ const CreatePlan = (props: any) => {
 
   const renderItem = ({ item }: any) => {
     let itemStyle: any;
-    let textStyle = {color: "white"};
+    let textStyle = { color: "white" };
 
     if (checkList.includes(item.id)) {
       itemStyle = [styles.check, { backgroundColor: "#3F8EEC" }];
@@ -120,7 +122,7 @@ const CreatePlan = (props: any) => {
         backgroundColor: theme.theme ? "#585858" : "#FFFFFF", borderWidth: 1,
         borderColor: theme.theme ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)", boxSizing: "border-box"
       }];
-      textStyle = {color: theme.theme ? "white" : "black"};
+      textStyle = { color: theme.theme ? "white" : "black" };
     }
     const onPress = (id: any) => {
       let res = checkList;
@@ -305,7 +307,7 @@ const styles = StyleSheet.create({
   },
   header: {
     marginTop: "6%",
-    marginBottom: "2%",
+    marginBottom: "4%",
     marginHorizontal: "5%",
     justifyContent: "space-around",
     flexDirection: "row",

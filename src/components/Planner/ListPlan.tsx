@@ -203,8 +203,6 @@ const ListPlan = (props: any) => {
       <View style={styles.list}>
         <FlatList
           style={{
-            borderBottomWidth: 0.5,
-            borderColor: "rgba(0, 0, 0, 0.2)"
           }}
           data={dataState}
           renderItem={renderItem}
@@ -223,7 +221,6 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: "8%",
     marginRight: "8%",
-    marginBottom: "5%",
     justifyContent: "center",
     flex: 1,
     borderRadius: 20
