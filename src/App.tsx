@@ -47,7 +47,6 @@ const MainScreen = ({ navigation }: any) => {
 const App = () => {
   const [theme, setTheme] = useState(useSelector(getMode));
   const [isLoading, setLoading] = useState(true);
-  console.log(theme)
   const dispatch = useDispatch();
 
   // "https://github.com/ReWWeR/teleset/blob/master/src/fonts/Radomir%20Tinkov%20-%20Gilroy-Medium.otf?raw=true"

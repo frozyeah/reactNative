@@ -16,7 +16,7 @@ const ModelPanel = (props: any) => {
         <TouchableOpacity activeOpacity={0.7}>
           <View style={styles.button}>
             <PowerButton style={{ marginTop: "5%" }} />
-            <Text style={{ color: "#fff", fontSize: 13.86, marginTop: "5%", marginBottom: "5%", fontFamily: "Gilroy" }}>Начать уборку</Text>
+            <Text style={{ color: "#fff", fontSize: 13, marginTop: "5%", marginBottom: "5%", fontFamily: "Gilroy" }}>Начать уборку</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   text: {
-    fontSize: 17.52,
+    fontSize: 16,
     color: "white",
     fontFamily: "Gilroy"
   },

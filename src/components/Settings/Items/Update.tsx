@@ -20,7 +20,7 @@ const Update = (props: any) => {
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7 }}>
         <View style={styles.head}>
-          <Text style={{ fontSize: 19.96, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
             Обновление прошивки
           </Text>
         </View>
@@ -29,7 +29,7 @@ const Update = (props: any) => {
             <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy" }}>
               Автоматическое обновление
             </Text>
-            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 12, fontFamily: "Gilroy" }}>
+            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 11, fontFamily: "Gilroy" }}>
               Последнее обновление было 03.03.2021
             </Text>
           </View>

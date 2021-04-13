@@ -4,6 +4,9 @@ import ModalDropdown from 'react-native-modal-dropdown';
 // import DatePicker from 'react-native-date-picker'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+import ArrowNight from "../../../assets/svg/night/dropdown-arrow.svg";
+import ArrowDay from "../../../assets/svg/day/dropdown-arrow.svg";
+
 import PlannerModeNight from "../../../assets/svg/night/planner.svg";
 import PlannerModeDay from "../../../assets/svg/day/planner.svg";
 
@@ -111,6 +114,20 @@ const CreatePlan = (props: any) => {
 
   }, []);
 
+  const renderRow = (option: string, index: string, isSelected: boolean) => (
+    <View style={{}}>
+      <Text style={{
+        marginHorizontal: "2.5%",
+        marginVertical: 2.5,
+        alignSelf: 'center', fontSize: 14,
+        color: isSelected ? (theme.theme ? "#fff" : "#000") :
+          (theme.theme ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)")
+      }}>
+        {option}
+      </Text>
+    </View>
+  )
+
   const renderItem = ({ item }: any) => {
     let itemStyle: any;
     let textStyle = { color: "white" };
@@ -167,13 +184,21 @@ const CreatePlan = (props: any) => {
             Режим очистки
           </Text>
         </View>
-        <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-          <ModalDropdown style={{}} defaultValue='Select'
+        <View style={{ alignSelf: "center" }}>
+          <ModalDropdown style={{ alignSelf: "center" }} defaultValue="Auto" defaultIndex={0}
             options={[
               'Auto', 'Edge', 'Spot', 'Random'
             ]}
+            // @ts-ignore
+            renderRightComponent={theme.theme ? ArrowNight : ArrowDay}
+            dropdownStyle={{
+              borderWidth: 0, justifyContent: "space-between", backgroundColor: theme.theme ? "rgba(93, 93, 93, 1)" :
+                "rgba(255, 255, 255, 1)", height: 104, borderRadius: 10, alignContent: "center", alignSelf: "center"
+            }}
+            textStyle={{ alignSelf: 'center', fontSize: 14, color: theme.theme ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 1)" }}
             onSelect={(index: string, value: string) => { setMode(value) }}
-            renderButtonText={(rowData: any) => { return rowData.value }}
+            renderRow={renderRow}
+            renderSeparator={() => <View style={{ width: "100%", height: 0, borderWidth: 0.5, borderColor: "rgba(0, 0, 0, 0.2)" }} />}
           />
         </View>
       </View>
@@ -224,13 +249,24 @@ const CreatePlan = (props: any) => {
             Мощность
           </Text>
         </View>
-        <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-          <ModalDropdown style={{}} defaultValue='Select'
+        <View style={{ alignSelf: "center" }}>
+          <ModalDropdown
+            style={{ alignSelf: "center" }}
+            defaultValue='Select'
+            // @ts-ignore
+            renderRightComponent={theme.theme ? ArrowNight : ArrowDay}
+            defaultIndex={0}
             options={[
               'Silent', 'Standart', 'Medium', 'Turbo'
             ]}
+            dropdownStyle={{
+              borderWidth: 0, justifyContent: "center", backgroundColor: theme.theme ? "rgba(93, 93, 93, 1)" :
+                "rgba(255, 255, 255, 1)", height: 104, borderRadius: 10, alignContent: "center", alignSelf: "center"
+            }}
+            textStyle={{ alignSelf: 'center', fontSize: 14, color: theme.theme ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 1)" }}
             onSelect={(index: string, value: string) => { setPower(value) }}
-            renderButtonText={(rowData: any) => { return rowData.value }}
+            renderRow={renderRow}
+            renderSeparator={() => <View style={{ width: "100%", height: 0, borderWidth: 0.5, borderColor: "rgba(0, 0, 0, 0.2)" }} />}
           />
           {/* <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
             Менюшка

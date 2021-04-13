@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: "4%",
-    fontSize: 21.96,
+    fontSize: 18,
     fontFamily: "Gilroy"
   }
 });

@@ -81,7 +81,7 @@ const Item = (props: any) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style, { borderColor: props.isEnabled ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={props.onPress}>
     <View style={{ flexDirection: "row", justifyContent: "center" }}>
       {props.isEnabled ? <props.item.nIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} /> : <props.item.dIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} />}
-      <Text style={[styles.font, { color: props.isEnabled ? "white" : "black", fontSize: 20, marginLeft: vw(2.7), alignSelf: "center" }]}>
+      <Text style={[styles.font, { color: props.isEnabled ? "white" : "black", fontSize: 18, marginLeft: vw(2.7), alignSelf: "center" }]}>
         {props.item.title}
       </Text>
     </View>

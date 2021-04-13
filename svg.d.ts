@@ -16,3 +16,8 @@ declare module 'react-native-expo-viewport-units' {
     const vmax: (n: number) => number;
     export {vh, vw, vmin, vmax};
 }
+
+declare module 'react-mobile-picker-scroll' {
+    const Picker: any;
+    export default Picker;
+}
