@@ -8,8 +8,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@davidgovea/react-native-wheel-datepicker": "^1.0.2",
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/datetimepicker": "3.0.4",
+    "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/slider": "3.0.3",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
@@ -43,6 +45,7 @@
     "react-native-navigation-bar-color": "^2.0.1",
     "react-native-popup-menu": "^0.15.10",
     "react-native-reanimated": "~1.13.0",
+    "react-native-redash": "^16.0.11",
     "react-native-remote-svg": "^2.0.6",
     "react-native-screens": "~2.15.0",
     "react-native-settings-list": "^1.8.0",

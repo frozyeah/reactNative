@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Button, FlatList } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 // import DatePicker from 'react-native-date-picker'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+import { DatePicker } from '@davidgovea/react-native-wheel-datepicker';
 
 import ArrowNight from "../../../assets/svg/night/dropdown-arrow.svg";
 import ArrowDay from "../../../assets/svg/day/dropdown-arrow.svg";
@@ -16,6 +18,8 @@ import DoneDay from "../../../assets/svg/day/done.svg";
 import { storeData } from '../../actions/asyncStorage';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPlans } from "../../redux/actions";
+import { vh, vw } from 'react-native-expo-viewport-units';
+
 
 const DATA = [
   {
@@ -63,8 +67,8 @@ const CreatePlan = (props: any) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState<any>();
   const [checkList, setList] = useState<string[]>([]);
-  const [mode, setMode] = useState<string>();
-  const [power, setPower] = useState<string>();
+  const [mode, setMode] = useState<string>("Auto");
+  const [power, setPower] = useState<string>("Silent");
 
   let theme = props.theme;
 
@@ -117,7 +121,7 @@ const CreatePlan = (props: any) => {
   const renderRow = (option: string, index: string, isSelected: boolean) => (
     <View style={{}}>
       <Text style={{
-        marginHorizontal: "2.5%",
+        marginHorizontal: 5,
         marginVertical: 2.5,
         alignSelf: 'center', fontSize: 14,
         color: isSelected ? (theme.theme ? "#fff" : "#000") :
@@ -190,7 +194,8 @@ const CreatePlan = (props: any) => {
               'Auto', 'Edge', 'Spot', 'Random'
             ]}
             // @ts-ignore
-            renderRightComponent={theme.theme ? ArrowNight : ArrowDay}
+            renderRightComponent={theme.theme ? () => <ArrowNight style={{ marginLeft: vw(2.4) }} /> :
+              () => <ArrowDay style={{ marginLeft: vw(2.4) }} />}
             dropdownStyle={{
               borderWidth: 0, justifyContent: "space-between", backgroundColor: theme.theme ? "rgba(93, 93, 93, 1)" :
                 "rgba(255, 255, 255, 1)", height: 104, borderRadius: 10, alignContent: "center", alignSelf: "center"
@@ -222,11 +227,11 @@ const CreatePlan = (props: any) => {
         }}
         onCancel={hideDatePicker}
       />
-      {/* <DatePicker
-        date={date}
-        onDateChange={setDate}
-        androidVariant="iosClone"
-      /> */}
+      <DatePicker
+        mode="time"
+        use12Hours
+        minuteInterval={15}
+        onDateChange={(date) => { console.log(date); }} />
       <View style={{}}>
         <Text style={{ fontFamily: "Gilroy", color: theme.theme ? "white" : "black", fontSize: 19, paddingHorizontal: "7%", paddingTop: "6%" }}>
           День повторения
@@ -252,9 +257,10 @@ const CreatePlan = (props: any) => {
         <View style={{ alignSelf: "center" }}>
           <ModalDropdown
             style={{ alignSelf: "center" }}
-            defaultValue='Select'
+            defaultValue='Silent'
             // @ts-ignore
-            renderRightComponent={theme.theme ? ArrowNight : ArrowDay}
+            renderRightComponent={theme.theme ? () => <ArrowNight style={{ marginLeft: vw(2.4) }} /> :
+              () => <ArrowDay style={{ marginLeft: vw(2.4) }} />}
             defaultIndex={0}
             options={[
               'Silent', 'Standart', 'Medium', 'Turbo'
@@ -268,9 +274,6 @@ const CreatePlan = (props: any) => {
             renderRow={renderRow}
             renderSeparator={() => <View style={{ width: "100%", height: 0, borderWidth: 0.5, borderColor: "rgba(0, 0, 0, 0.2)" }} />}
           />
-          {/* <Text style={{ color: "#4492EE", fontSize: 10, fontFamily: "Gilroy" }}>
-            Менюшка
-          </Text> */}
         </View>
       </View>
     </View>

@@ -21,7 +21,7 @@ const DATA = [
   },
   {
     id: "3",
-    title: "Spot",
+    title: "Medium",
     Icon: Silent
   },
   {
