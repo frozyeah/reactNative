@@ -14,12 +14,12 @@ const Info = (props: any) => {
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7 }}>
         <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
             Информация
           </Text>
         </View>
         <View style={{ flex: 10 }}>
-          <Text style={{ fontSize: 12.96, color: theme ? "white" : "black", fontFamily: "Gilroy", paddingHorizontal: "2%", paddingTop: "2%" }}>
+          <Text style={{ fontSize: 12.96, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium", paddingHorizontal: "2%", paddingTop: "2%" }}>
             Автоматический робот пылесос - это полноценный пылесос.
             Его основное отличие от обычных  пылесосов в том,
             что он способен убирать самостоятельно и автономно.

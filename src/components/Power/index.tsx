@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "2%",
     fontSize: 18,
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   },
   radioContainer: {
     paddingTop: vh(2)
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: vw(1.916),
     borderRadius: 10,
-    width: 60.55,
-    height: 56.61
+    width: vw(16.15),
+    height: vw(16.15)*0.935
   },
 });
 

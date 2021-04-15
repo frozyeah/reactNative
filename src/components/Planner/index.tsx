@@ -32,8 +32,11 @@ const Planner = (props: any) => {
     if (value !== undefined) {
       setData(JSON.parse(value));
       dispatch({ type: 'CHANGE_PLANS', data: dataState });
-      setLoading(false);
+    } else {
+      setData([]);
+      dispatch({ type: 'CHANGE_PLANS', data: dataState });
     }
+    setLoading(false);
     return;
   })
 
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "4%",
     fontSize: 18,
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   }
 });
 

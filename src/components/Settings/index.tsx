@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     // backgroundColor:"#000000",
   },
   font: {
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   },
   element: {
     borderBottomWidth: 0.5,

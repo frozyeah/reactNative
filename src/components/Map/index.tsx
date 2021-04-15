@@ -44,7 +44,7 @@ const Map = (props: any) => {
             <View style={styles.header}>
               <View style={{ flexDirection: "row" }}>
                 {theme.theme ? <MapIconNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <MapIconDay style={{ marginRight: "4%", alignSelf: "center" }} />}
-                <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+                <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
                   Карта уборки
                 </Text>
               </View>
@@ -58,11 +58,11 @@ const Map = (props: any) => {
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button, { backgroundColor: "#59A1F6", marginRight: "5%" }]}>
                 <Reset />
-                <Text style={{ color: "#fff", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy" }}>Reset Map</Text>
+                <Text style={{ color: "#fff", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy-Medium" }}>Reset Map</Text>
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.7} style={[styles.button, { backgroundColor: "#fff" }]}>
                 <EditMap />
-                <Text style={{ color: "#418FED", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy" }}>Edit Map</Text>
+                <Text style={{ color: "#418FED", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy-Medium" }}>Edit Map</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "6%",
     fontSize: 18,
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   },
   button: {
     // paddingVertical:"6%",

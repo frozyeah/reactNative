@@ -95,10 +95,10 @@ const DATA = [
 const Item = ({ item, onPress, theme }: any) => (
   <TouchableOpacity activeOpacity={1} style={[styles.element, { backgroundColor: theme ? "#4F4F4F" : "rgba(242, 242, 242, 1)" }]}>
     <View style={{ flexDirection: "column" }}>
-      <Text style={{ color: theme ? "white" : "black", fontSize: 25, fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "white" : "black", fontSize: 25, fontFamily: "Gilroy-Medium" }}>
         {item.hour + ":" + item.min}
       </Text>
-      <Text style={{ color: theme ? "rgba(255,255,255,0.4)" : "rgba(0, 0, 0, 0.4)", fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "rgba(255,255,255,0.4)" : "rgba(0, 0, 0, 0.4)", fontFamily: "Gilroy-Medium" }}>
         {item.mode + ", " + item.days + ", " + item.power}
       </Text>
     </View>
@@ -190,7 +190,7 @@ const ListPlan = (props: any) => {
       <View style={styles.header}>
         <View style={{ flexDirection: "row" }}>
           {theme.theme ? <PlannerModeNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay style={{ marginRight: "4%", alignSelf: "center" }} />}
-          <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
             Планирование уборки
           </Text>
         </View>

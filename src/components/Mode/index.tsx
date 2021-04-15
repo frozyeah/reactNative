@@ -36,7 +36,7 @@ const DATA = [
 const Item = ({ item, onPress, style, textStyle }: any) => (
   <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={[styles.radio, style]}>
     <item.Icon />
-    <Text style={[textStyle, { fontFamily: "Gilroy", fontSize: 12 }]}>
+    <Text style={[textStyle, { fontFamily: "Gilroy-Medium", fontSize: 12 }]}>
       {item.title}
     </Text>
   </TouchableOpacity>
@@ -64,10 +64,10 @@ const Mode = (props: any) => {
       <View style={styles.head}>
         {theme.theme ? <ModeIconNight /> : <ModeIconDay />}
         <Text style={[styles.text, theme.text]}>
-            Режим уборки
+          Режим уборки
         </Text>
       </View>
-      <View style={{alignItems:"center", justifyContent:"center"}}>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
         <FlatList
           scrollEnabled={false}
           numColumns={4}
@@ -104,13 +104,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginHorizontal: vw(1.916),
     borderRadius: 10,
-    width: 60.55,
-    height: 56.61
+    width: vw(16.15),
+    height: vw(16.15)*0.935
   },
   text: {
     marginLeft: "2%",
     fontSize: 18,
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   },
   buttonText: {
     color: "white"

@@ -17,7 +17,7 @@ const Header = (props: any) => {
         </View>
         </TouchableOpacity>
         <View style={styles.text}>
-          <Text style={[{fontSize: 11, color:"rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy"}, theme.topText]}>Hello</Text>
+          <Text style={[{fontSize: 11, color:"rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy-Medium"}, theme.topText]}>Hello</Text>
           <Text style={[{fontSize: 13, fontFamily: "Gilroy"}, theme.bottomText]}>Nick Korzh</Text>
         </View>
       </View>

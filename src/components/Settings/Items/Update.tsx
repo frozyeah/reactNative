@@ -20,16 +20,16 @@ const Update = (props: any) => {
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7 }}>
         <View style={styles.head}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "GilrGilroy-Mediumoy" }}>
             Обновление прошивки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} style={[styles.element, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={() => setValue(!switchValue)}>
           <View style={{ flexDirection: "column" }}>
-            <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy" }}>
+            <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy-Medium" }}>
               Автоматическое обновление
             </Text>
-            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 11, fontFamily: "Gilroy" }}>
+            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 11, fontFamily: "GilGilroy-Mediumoy" }}>
               Последнее обновление было 03.03.2021
             </Text>
           </View>
@@ -46,10 +46,10 @@ const Update = (props: any) => {
           </View>
         </TouchableOpacity>
         <View style={{ flex: 1, alignItems: "center", paddingTop: "50%" }}>
-          <Text style={{ color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)", fontSize: 14, fontFamily: "Gilroy" }}>
+          <Text style={{ color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)", fontSize: 14, fontFamily: "Gilroy-Medium" }}>
             Firmware version: 2.7
           </Text>
-          <Text style={{ color: theme ? "white" : "black", fontSize: 17, fontFamily: "Gilroy" }}>
+          <Text style={{ color: theme ? "white" : "black", fontSize: 17, fontFamily: "Gilroy-Medium" }}>
             Your software is up to date.
           </Text>
         </View>
@@ -57,7 +57,7 @@ const Update = (props: any) => {
           <TouchableOpacity onPressOut={() => setVisible(!modalVisible)} activeOpacity={0.7} style={{
             width: "80%", height: "8%", backgroundColor: "#59A1F6", justifyContent: "center", borderRadius: 10, alignSelf: "center", marginBottom: "10%"
           }}>
-            <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy", fontSize: 16 }}>
+            <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: 16 }}>
               Проверить наличие обновлений
             </Text>
           </TouchableOpacity>}
@@ -68,7 +68,7 @@ const Update = (props: any) => {
             <View style={[styles.modalContainer, { backgroundColor: theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
               <View style={styles.header}>
                 <View style={{ flexDirection: "row" }}>
-                  <Text style={{ fontSize: 21.96, color: theme ? "white" : "black", alignSelf: "center", marginLeft: "7%", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+                  <Text style={{ fontSize: 21.96, color: theme ? "white" : "black", alignSelf: "center", marginLeft: "7%", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
                     Доступные обновления
                   </Text>
                 </View>
@@ -79,7 +79,7 @@ const Update = (props: any) => {
                 </TouchableOpacity>
               </View>
               <View style={{ alignItems: "center" }}>
-                <Text style={{ color: theme ? "white" : "black", fontSize: 18, marginVertical: "4%", fontFamily: "Gilroy" }}>
+                <Text style={{ color: theme ? "white" : "black", fontSize: 18, marginVertical: "4%", fontFamily: "Gilroy-Medium" }}>
                   Firmware version: 2.7.1
                 </Text>
                 <Text style={[styles.changes, { color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)" }]}>
@@ -95,7 +95,7 @@ const Update = (props: any) => {
                   width: "33%", height: "20%", backgroundColor: "#59A1F6",
                   justifyContent: "center", borderRadius: 10, alignSelf: "center", marginTop: "5%"
                 }}>
-                  <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy", fontSize: 16 }}>
+                  <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: 16 }}>
                     Обновить
                   </Text>
                 </TouchableOpacity>

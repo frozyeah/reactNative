@@ -3,7 +3,6 @@ import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector, useDispatch } from 'react-redux';
-import { useFonts } from 'expo-font';
 
 import Header from './components/Header';
 import ModelPanel from './components/ModelPanel';
@@ -49,12 +48,6 @@ const App = () => {
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  // "https://github.com/ReWWeR/teleset/blob/master/src/fonts/Radomir%20Tinkov%20-%20Gilroy-Medium.otf?raw=true"
-
-  let [fontsLoaded, error] = useFonts({
-    Gilroy: require('../assets/fonts/Gilroy-Medium.ttf'),
-  });
-
   useEffect(() => {
     // dispatch({type:"CHANGE_MODE", data: theme});
   }, []);
@@ -65,7 +58,7 @@ const App = () => {
     setLoading(false);
   });
 
-  if (!fontsLoaded && isLoading) {
+  if (isLoading) {
     return (
       <View style={[styles.container, styles.loader]}>
         <ActivityIndicator size="large" color="#fff" />
@@ -99,7 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   text: {
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   }
 });
 

@@ -27,7 +27,7 @@ const BatteryButton = (props: any) => {
             <View style={styles.header}>
               <View style={{ flexDirection: "row", alignItems: "center", paddingLeft: "4%" }}>
                 {props.theme ? <BatteryNight height={25} width={25} /> : <BatteryDay height={25} width={25} />}
-                <Text style={[{ fontSize: 21.96, alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy", paddingLeft: "2%" }, modal.text]}>
+                <Text style={[{ fontSize: 21.96, alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium", paddingLeft: "2%" }, modal.text]}>
                   Уровень заряда
                 </Text>
               </View>
@@ -38,16 +38,16 @@ const BatteryButton = (props: any) => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={0.7} style={{ height: 178, width: 178, backgroundColor: "#59A1F6", borderRadius: 89, alignSelf: "center", justifyContent: "center" }}>
-              <Text style={{ color: "white", fontSize: 80.84, alignSelf: "center", fontFamily: "Gilroy" }}>
+              <Text style={{ color: "white", fontSize: 80.84, alignSelf: "center", fontFamily: "Gilroy-Medium" }}>
                 33%
               </Text>
             </TouchableOpacity>
-            <Text style={[{ fontSize: 15.86, alignSelf: "center", fontFamily: "Gilroy" }, modal.text]}>
+            <Text style={[{ fontSize: 15.86, alignSelf: "center", fontFamily: "Gilroy-Medium" }, modal.text]}>
               Заряда хватит на 1 час и 27 минут
             </Text>
             <TouchableOpacity activeOpacity={0.7} style={styles.recharge}>
               <RechargeIcon />
-              <Text style={{ color: "#fff", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy" }}>Recharge</Text>
+              <Text style={{ color: "#fff", fontSize: 14.64, alignSelf: "center", fontFamily: "Gilroy-Medium" }}>Recharge</Text>
             </TouchableOpacity>
           </View>
         </View>

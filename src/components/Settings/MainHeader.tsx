@@ -40,7 +40,7 @@ const MainHeader = (props: any) => {
           </View>
         </TouchableOpacity>
         <View style={styles.text}>
-          <Text style={[{ fontSize: 16.86, fontFamily: "Gilroy" }, mode.font]}>Nick Korzh</Text>
+          <Text style={[{ fontSize: 16.86, fontFamily: "Gilroy-Medium" }, mode.font]}>Nick Korzh</Text>
         </View>
         <View style={{ justifyContent: "center" }} >
           <TouchableOpacity style={[styles.edit, mode.circles]} activeOpacity={0.7}>

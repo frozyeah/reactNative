@@ -34,15 +34,15 @@ const DATA = [
 const Item = (item: any, theme: boolean) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, { backgroundColor: theme ? "black" : "white", borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
     <View style={{ flexDirection: "column" }}>
-      <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy-Medium" }}>
         {item.title}
       </Text>
-      <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 12, fontFamily: "Gilroy" }}>
+      <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 12, fontFamily: "Gilroy-Medium" }}>
         {item.bottomText}
       </Text>
     </View>
     <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-      <Text style={{ color: "#4492EE", fontSize: 24, fontFamily: "Gilroy" }}>
+      <Text style={{ color: "#4492EE", fontSize: 24, fontFamily: "Gilroy-Medium" }}>
         {item.percents}
       </Text>
     </View>
@@ -57,7 +57,7 @@ const ManageVacuum = (props: any) => {
       <SubHeader theme={theme} nav={props.navigation} />
       <View style={{ flex: 8.7, justifyContent: "flex-start" }}>
         <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy" }}>
+          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
             Управление роботом-пылесосом
           </Text>
         </View>

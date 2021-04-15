@@ -54,7 +54,7 @@ const DATA = [
 
 const Item = ({ item, onPress, style, textStyle }: any) => (
   <TouchableOpacity onPress={() => onPress(item.id)} activeOpacity={0.7} style={style}>
-    <Text style={[{ fontFamily: "Gilroy" }, textStyle]}>
+    <Text style={[{ fontFamily: "Gilroy-Medium" }, textStyle]}>
       {item.title}
     </Text>
   </TouchableOpacity>
@@ -66,6 +66,7 @@ const CreatePlan = (props: any) => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState<any>();
+  const [dateWheel, setWheel] = useState<any>();
   const [checkList, setList] = useState<string[]>([]);
   const [mode, setMode] = useState<string>("Auto");
   const [power, setPower] = useState<string>("Silent");
@@ -184,7 +185,7 @@ const CreatePlan = (props: any) => {
       </View>
       <View style={styles.element}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy" }}>
+          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy-Medium" }}>
             Режим очистки
           </Text>
         </View>
@@ -207,10 +208,10 @@ const CreatePlan = (props: any) => {
           />
         </View>
       </View>
-      <Button title="Show Time Picker" onPress={() => {
+      {/* <Button title="Show Time Picker" onPress={() => {
         setDatePickerVisibility(true);
-      }} />
-      <DateTimePickerModal
+      }} /> */}
+      {/* <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="time"
         textColor="black"
@@ -226,14 +227,25 @@ const CreatePlan = (props: any) => {
           setDate({ hours: hours, min: min });
         }}
         onCancel={hideDatePicker}
-      />
+      /> */}
       <DatePicker
         mode="time"
         use12Hours
-        minuteInterval={15}
-        onDateChange={(date) => { console.log(date); }} />
+        style={{height:vh(20), backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)"}}
+        date={dateWheel}
+        minuteInterval={1}
+        onDateChange={(time) => { 
+          console.log(time);
+          let hours = time.getHours().toString();
+          let min: any = time.getMinutes();
+          if (min < 10) {
+            min = "0" + min.toString();
+          }
+          hideDatePicker();
+          setDate({ hours: hours, min: min });
+        }} />
       <View style={{}}>
-        <Text style={{ fontFamily: "Gilroy", color: theme.theme ? "white" : "black", fontSize: 19, paddingHorizontal: "7%", paddingTop: "6%" }}>
+        <Text style={{ fontFamily: "Gilroy-Medium", color: theme.theme ? "white" : "black", fontSize: 19, paddingHorizontal: "7%", paddingTop: "6%" }}>
           День повторения
         </Text>
         <View style={styles.checkContainer}>
@@ -250,7 +262,7 @@ const CreatePlan = (props: any) => {
       </View>
       <View style={styles.element}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy" }}>
+          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy-Medium" }}>
             Мощность
           </Text>
         </View>
@@ -393,7 +405,7 @@ const styles = StyleSheet.create({
     marginLeft: "2%",
     color: "white",
     fontSize: 21.96,
-    fontFamily: "Gilroy"
+    fontFamily: "Gilroy-Medium"
   }
 });
 
