@@ -62,7 +62,7 @@ const Mode = (props: any) => {
   return (
     <View style={[styles.container, theme.back]}>
       <View style={styles.head}>
-        {theme.theme ? <ModeIconNight /> : <ModeIconDay />}
+        {theme.theme ? <ModeIconNight height={vw(4.6)} width={vw(4.9)} /> : <ModeIconDay height={vw(4.6)} width={vw(4.9)} />}
         <Text style={[styles.text, theme.text]}>
           Режим уборки
         </Text>
@@ -84,11 +84,11 @@ const Mode = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: vh(2.5),
-    flex: 2.1,
-    borderRadius: 20,
+    height: vh(18.47),
+    borderRadius: vh(2.4),
   },
   head: {
     marginLeft: "5%",
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: "2%",
-    fontSize: 18,
+    fontSize: vw(4.8),
     fontFamily: "Gilroy-Medium"
   },
   buttonText: {

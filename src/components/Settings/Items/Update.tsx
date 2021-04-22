@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native';
 import SubHeader from '../SubHeader';
 import ToggleSwitch from '../../ToggleSwitch';
+import { vh, vw } from 'react-native-expo-viewport-units';
 
 import CloseNight from "../../../../assets/svg/night/close.svg";
 import CloseDay from "../../../../assets/svg/day/close.svg";
-
 
 import { getMode } from "../../../redux/actions";
 import { useSelector } from 'react-redux';
@@ -18,18 +18,18 @@ const Update = (props: any) => {
   return (
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
-      <View style={{ flex: 8.7 }}>
+      <View style={{}}>
         <View style={styles.head}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "GilrGilroy-Mediumoy" }}>
+          <Text style={{ fontSize: vw(4.8), color: theme ? "white" : "black", fontFamily: "GilrGilroy-Mediumoy" }}>
             Обновление прошивки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} style={[styles.element, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={() => setValue(!switchValue)}>
           <View style={{ flexDirection: "column" }}>
-            <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy-Medium" }}>
+            <Text style={{ color: theme ? "white" : "black", fontSize: vw(4.8), fontFamily: "Gilroy-Medium" }}>
               Автоматическое обновление
             </Text>
-            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 11, fontFamily: "GilGilroy-Mediumoy" }}>
+            <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: vw(2.9), fontFamily: "GilGilroy-Mediumoy" }}>
               Последнее обновление было 03.03.2021
             </Text>
           </View>
@@ -45,22 +45,24 @@ const Update = (props: any) => {
             />
           </View>
         </TouchableOpacity>
-        <View style={{ flex: 1, alignItems: "center", paddingTop: "50%" }}>
-          <Text style={{ color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)", fontSize: 14, fontFamily: "Gilroy-Medium" }}>
+        <View style={{ alignItems: "center", paddingTop: "48%" }}>
+          <Text style={{ color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)", fontSize: vw(3.74), fontFamily: "Gilroy-Medium" }}>
             Firmware version: 2.7
           </Text>
-          <Text style={{ color: theme ? "white" : "black", fontSize: 17, fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ color: theme ? "white" : "black", fontSize: vw(4.53), fontFamily: "Gilroy-Medium" }}>
             Your software is up to date.
           </Text>
         </View>
         {switchValue ? <View /> :
-          <TouchableOpacity onPressOut={() => setVisible(!modalVisible)} activeOpacity={0.7} style={{
-            width: "80%", height: "8%", backgroundColor: "#59A1F6", justifyContent: "center", borderRadius: 10, alignSelf: "center", marginBottom: "10%"
-          }}>
-            <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: 16 }}>
-              Проверить наличие обновлений
-            </Text>
-          </TouchableOpacity>}
+          <View style={{ marginTop: vw(37) }}>
+            <TouchableOpacity onPressOut={() => setVisible(!modalVisible)} activeOpacity={0.7} style={{
+              width: vw(70.66), height: vw(12.26), backgroundColor: "#59A1F6", justifyContent: "center", borderRadius: vw(2.7), alignSelf: "center", marginBottom: vh(4.9)
+            }}>
+              <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: vw(4.26) }}>
+                Проверить наличие обновлений
+              </Text>
+            </TouchableOpacity>
+          </View>}
         <Modal animationType="fade"
           transparent={true}
           visible={modalVisible}>
@@ -68,18 +70,18 @@ const Update = (props: any) => {
             <View style={[styles.modalContainer, { backgroundColor: theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
               <View style={styles.header}>
                 <View style={{ flexDirection: "row" }}>
-                  <Text style={{ fontSize: 21.96, color: theme ? "white" : "black", alignSelf: "center", marginLeft: "7%", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
+                  <Text style={{ fontSize: vw(4.8), color: theme ? "white" : "black", alignSelf: "center", marginLeft: vw(6.67), justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
                     Доступные обновления
                   </Text>
                 </View>
                 <TouchableOpacity activeOpacity={0.7} onPressOut={() => setVisible(!modalVisible)}>
-                  <View style={[styles.close, { marginHorizontal: "5%" }]}>
-                    {theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
+                  <View style={[styles.close, { marginHorizontal: vw(2.4) }]}>
+                    {theme ? <CloseNight width={vw(3.5)} height={vw(3.5)} /> : <CloseDay width={vw(3.5)} height={vw(3.5)} />}
                   </View>
                 </TouchableOpacity>
               </View>
               <View style={{ alignItems: "center" }}>
-                <Text style={{ color: theme ? "white" : "black", fontSize: 18, marginVertical: "4%", fontFamily: "Gilroy-Medium" }}>
+                <Text style={{ color: theme ? "white" : "black", fontSize: vw(4.8), marginTop: vw(9.6), marginBottom: vw(5.34), fontFamily: "Gilroy-Medium" }}>
                   Firmware version: 2.7.1
                 </Text>
                 <Text style={[styles.changes, { color: theme ? "rgba(255,255,255,0.6)" : "rgba(0, 0, 0, 0.6)" }]}>
@@ -92,8 +94,8 @@ const Update = (props: any) => {
                   Улучшено голосовое управление роботом.
                 </Text>
                 <TouchableOpacity onPressOut={() => setVisible(!modalVisible)} activeOpacity={0.7} style={{
-                  width: "33%", height: "20%", backgroundColor: "#59A1F6",
-                  justifyContent: "center", borderRadius: 10, alignSelf: "center", marginTop: "5%"
+                  width: vw(30.7), height: vw(10.13), backgroundColor: "#59A1F6",
+                  justifyContent: "center", borderRadius: vw(2.7), alignSelf: "center", marginTop: vw(5.34)
                 }}>
                   <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: 16 }}>
                     Обновить
@@ -115,13 +117,13 @@ const styles = StyleSheet.create({
   modalContainer: {
     height: "60.6%",
     marginTop: "58%",
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: "2%",
-    borderRadius: 20,
+    borderRadius: vw(5.34),
   },
   changes: {
-    fontSize: 12,
+    fontSize: vw(3.2),
     fontFamily: "Gilroy",
     alignSelf: "flex-start",
     marginHorizontal: "5%",
@@ -133,14 +135,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: "5%",
     // backgroundColor: "#000",
-    height: 40,
-    width: 40,
-    borderRadius: 20,
+    height: vw(12),
+    width: vw(12),
+    borderRadius: vw(6),
   },
   head: {
     alignItems: "center",
     width: "100%",
-    paddingBottom: "4%"
+    paddingBottom: vw(4.8)
   },
   header: {
     marginTop: "3.5%",

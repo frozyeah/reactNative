@@ -26,40 +26,40 @@ const DATA = [
   {
     id: "1",
     title: "Ночной режим",
-    nIcon: MoonNight,
-    dIcon: MoonDay,
+    nIcon: <MoonNight height={vw(4.8)} width={vw(4.8)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
+    dIcon: <MoonDay height={vw(4.8)} width={vw(4.8)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
     hasSwitch: true,
     navigationLoc: false
   },
   {
     id: "2",
     title: "Управление роботом-пылесос...",
-    nIcon: ManageNight,
-    dIcon: ManageDay,
+    nIcon: <ManageNight height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
+    dIcon: <ManageDay height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
     hasSwitch: false,
     navigationLoc: 'ManageVacuum'
   },
   {
     id: "3",
     title: "Информация",
-    nIcon: InfoNight,
-    dIcon: InfoDay,
+    nIcon: <InfoNight height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
+    dIcon: <InfoDay height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
     hasSwitch: false,
     navigationLoc: 'Info'
   },
   {
     id: "4",
     title: "Обновление прошивки",
-    nIcon: UpdateNight,
-    dIcon: UpdateDay,
+    nIcon: <UpdateNight height={vw(5.6)} width={vw(5.6)} style={{ alignSelf: "center", marginLeft: vw(7.7333) }} />,
+    dIcon: <UpdateDay height={vw(5.6)} width={vw(5.6)} style={{ alignSelf: "center", marginLeft: vw(7.7333) }} />,
     hasSwitch: false,
     navigationLoc: 'Update'
   },
   {
     id: "5",
     title: "Сброс настроек",
-    nIcon: ResetNight,
-    dIcon: ResetDay,
+    nIcon: <ResetNight height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
+    dIcon: <ResetDay height={vw(5.07)} width={vw(5.07)} style={{ alignSelf: "center", marginLeft: vw(8.2666) }} />,
     hasSwitch: false,
     navigationLoc: 'Reset'
   }
@@ -78,10 +78,10 @@ const dayColors = {
 }
 
 const Item = (props: any) => (
-  <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style, { borderColor: props.isEnabled ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={props.onPress}>
+  <TouchableOpacity activeOpacity={0.7} style={[styles.element, props.style, { paddingVertical: props.item.hasSwitch ? vh(1.6) : vh(2.34), borderColor: props.isEnabled ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]} onPressOut={props.onPress}>
     <View style={{ flexDirection: "row", justifyContent: "center" }}>
-      {props.isEnabled ? <props.item.nIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} /> : <props.item.dIcon style={{ alignSelf: "center", marginLeft: vw(8.27) }} />}
-      <Text style={[styles.font, { color: props.isEnabled ? "white" : "black", fontSize: 18, marginLeft: vw(2.7), alignSelf: "center" }]}>
+      {props.isEnabled ? props.item.nIcon : props.item.dIcon}
+      <Text style={[styles.font, { color: props.isEnabled ? "white" : "black", fontSize: vw(4.8), marginLeft: vw(2.7), alignSelf: "center" }]}>
         {props.item.title}
       </Text>
     </View>
@@ -149,7 +149,7 @@ const Settings = (props: any) => {
   if (!isLoading) return (
     <View style={[styles.container, mode.home]}>
       <MainHeader theme={switchValue} nav={props.navigation} />
-      <View style={{ flex: 8.7 }}>
+      <View style={{}}>
         <FlatList
           data={DATA}
           renderItem={({ item }) => renderItem(item)}
@@ -181,7 +181,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingVertical: "4%"
   },
 })
 

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector, useDispatch } from 'react-redux';
+import { useColorScheme } from 'react-native-appearance';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import Header from './components/Header';
 import ModelPanel from './components/ModelPanel';
@@ -33,6 +35,8 @@ const MainScreen = ({ navigation }: any) => {
 
   return (
     <View style={[styles.container, mode.home]}>
+      <View style={styles.rect} />
+      <Image source={require("../assets/img/cleaner.png")} style={styles.cleaner} />
       <Header theme={mode.header} nav={navigation} />
       <ModelPanel text={styles.text} />
       <Mode theme={mode.radio} text={styles.text} />
@@ -44,18 +48,24 @@ const MainScreen = ({ navigation }: any) => {
 }
 
 const App = () => {
-  const [theme, setTheme] = useState(useSelector(getMode));
   const [isLoading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const [theme, setTheme] = useState<any>(useColorScheme());
 
   useEffect(() => {
     // dispatch({type:"CHANGE_MODE", data: theme});
   }, []);
 
-  if (isLoading) checkTheme().then((value: boolean) => {
-    setTheme(value);
-    dispatch({ type: 'CHANGE_MODE', data: value });
+  if (isLoading) checkTheme().then((value: boolean | undefined) => {
+    let res: boolean;
+    if(value === undefined){
+      res = (theme === 'dark')
+    } else {
+      res = value;
+    }
+    dispatch({ type: 'CHANGE_MODE', data: res });
     setLoading(false);
+    setTheme(res);
   });
 
   if (isLoading) {
@@ -93,7 +103,29 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Gilroy-Medium"
-  }
+  },
+  rect: {
+    zIndex: 2,
+    top: vh(11.6),
+    position: "absolute",
+    width: vh(12.44),
+    right: vw(8.3),
+    height: vh(12.68),
+    alignSelf: "flex-end",
+    backgroundColor: "#59A1F6",
+    borderTopEndRadius: vh(2.4),
+    borderBottomStartRadius: vh(2.4),
+  },
+  cleaner: {
+    zIndex: 3,
+    top: vh(13.133),
+    left: vw(49.5),
+    position: "absolute",
+    resizeMode: "contain",
+    height: vh(17.6),
+    width: vw(54.93),
+    alignSelf: "center"
+  },
 });
 
 export default App;

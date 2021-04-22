@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import SubHeader from '../SubHeader';
 import { getMode } from "../../../redux/actions";
 import { useSelector } from 'react-redux';
+import { vh, vw } from 'react-native-expo-viewport-units';
 
 
 const Info = (props: any) => {
@@ -12,14 +13,14 @@ const Info = (props: any) => {
   return (
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
-      <View style={{ flex: 8.7 }}>
+      <View style={{}}>
         <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ fontSize: vw(4.8), color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
             Информация
           </Text>
         </View>
-        <View style={{ flex: 10 }}>
-          <Text style={{ fontSize: 12.96, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium", paddingHorizontal: "2%", paddingTop: "2%" }}>
+        <View style={{}}>
+          <Text style={{ fontSize: vw(3.2), color: theme ? "white" : "black", fontFamily: "Gilroy-Medium", paddingHorizontal: vw(3.74), paddingTop: vw(4.8) }}>
             Автоматический робот пылесос - это полноценный пылесос.
             Его основное отличие от обычных  пылесосов в том,
             что он способен убирать самостоятельно и автономно.
@@ -42,9 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   head: {
-    flex: 1,
     alignItems: "center",
     borderBottomWidth: 0.5,
+    paddingBottom: vw(4.8),
     width: "100%"
   }
 })

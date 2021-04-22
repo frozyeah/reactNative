@@ -44,12 +44,12 @@ const MainHeader = (props: any) => {
         </View>
         <View style={{ justifyContent: "center" }} >
           <TouchableOpacity style={[styles.edit, mode.circles]} activeOpacity={0.7}>
-            {props.theme ? <EditNight style={{ height: "100%", width: "100%", alignSelf: "center" }} /> : <EditDay style={{ height: "100%", width: "100%", alignSelf: "center" }} />}
+            {props.theme ? <EditNight height={vw(4)} width={vw(4)} style={{ height: "100%", width: "100%", alignSelf: "center" }} /> : <EditDay height={vw(4)} width={vw(4)} style={{ height: "100%", width: "100%", alignSelf: "center" }} />}
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity activeOpacity={0.7} style={[styles.right, mode.circles]} onPressOut={() => props.nav.navigate('MainScreen')}>
-        {props.theme ? <HomeNight height={25} width={25} /> : <HomeDay height={25} width={25} />}
+        {props.theme ? <HomeNight height={vw(5.07)} width={vw(5.07)} /> : <HomeDay height={vw(5.07)} width={vw(5.07)} />}
       </TouchableOpacity>
     </View>
   );
@@ -57,35 +57,34 @@ const MainHeader = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: vh(4.9),
-    marginLeft: "8%",
-    marginRight: "8%",
-    marginBottom: vh(3.7),
+    marginTop: vh(2),
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
+    marginBottom: vh(4),
     alignItems: "center",
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between"
   },
   avatar: {
     // backgroundColor: "#212121",
-    height: 55,
-    width: 55,
-    borderRadius: 27.5,
+    height: vw(10.9),
+    width: vw(10.9),
+    borderRadius: vw(5.45),
   },
   edit: {
     // backgroundColor: "#212121",
-    height: 35.38,
-    width: 35.38,
-    borderRadius: 17.69,
+    height: vw(7.73),
+    width: vw(7.73),
+    borderRadius: vw(3.865),
     alignSelf: "center",
     justifyContent: "center",
     marginLeft: "12.3%"
   },
   button: {
     backgroundColor: "#212121",
-    height: 55,
-    width: 55,
-    borderRadius: 27.5,
+    height: vw(10.9),
+    width: vw(10.9),
+    borderRadius: vw(5.45),
   },
   left: {
     flexDirection: "row",
@@ -97,9 +96,9 @@ const styles = StyleSheet.create({
   },
   right: {
     // backgroundColor: "#212121",
-    height: 55,
-    width: 55,
-    borderRadius: 27.5,
+    height: vw(10.9),
+    width: vw(10.9),
+    borderRadius: vw(5.45),
     justifyContent: "center",
     alignItems: "center",
     // alignSelf:"flex-end"

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import SubHeader from '../SubHeader';
 import { getMode } from "../../../redux/actions";
 import { useSelector } from 'react-redux';
+import { vh, vw } from 'react-native-expo-viewport-units';
 
 const Reset = (props: any) => {
 
@@ -11,21 +12,21 @@ const Reset = (props: any) => {
   return (
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
-      <View style={{ flex: 8.7 }}>
+      <View style={{}}>
         <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ fontSize: vw(4.8), color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
             Сброс настроек
           </Text>
         </View>
-        <View style={{ flex: 10, alignContent: "center", alignSelf: "center" }}>
-          <Text style={{ fontSize: 14.96, color: theme ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)", fontFamily: "Gilroy-Medium", paddingHorizontal: "7%", paddingTop: "5%" }}>
+        <View style={{ alignContent: "center", alignSelf: "center" }}>
+          <Text style={{ fontSize: vw(3.7), color: theme ? "rgba(255, 255, 255, 0.6)" : "rgba(0, 0, 0, 0.6)", fontFamily: "Gilroy-Medium", paddingTop: vh(3.7) }}>
             Вы уверенны, что хотите сбросить настройки к начальным? Ваши данные будут сброшены.
           </Text>
           <TouchableOpacity activeOpacity={0.7} style={{
-            width: "75%", height: "8%", backgroundColor: "#59A1F6", justifyContent: "center",
-            borderRadius: 10, alignSelf: "center", paddingHorizontal: "5%", marginTop: "10%"
+            width: vw(48.5), height: vw(12.26), backgroundColor: "#59A1F6", justifyContent: "center",
+            borderRadius: vw(2.7), alignSelf: "center", marginTop: vh(3.7)
           }}>
-            <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: 15 }}>
+            <Text style={{ alignSelf: "center", color: "white", fontFamily: "Gilroy-Medium", fontSize: vw(3.7) }}>
               Сбросить настройки
             </Text>
           </TouchableOpacity>
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
   },
   head: {
-    flex: 1,
+    paddingBottom: vw(4.8),
     alignItems: "center",
     borderBottomWidth: 0.5,
     width: "100%"

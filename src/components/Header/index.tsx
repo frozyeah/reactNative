@@ -7,18 +7,18 @@ import SettingsButton from "./SettingsButton";
 const Header = (props: any) => {
   console.log(props.theme)
   let theme = props.theme;
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-      <TouchableOpacity activeOpacity={0.7}>
-        <View style={[styles.avatar, theme.circles]}>
-          <Image source={require("../../../assets/img/avatar.png")} style={{height:"100%", width:"100%", alignSelf:"center"}} />
-        </View>
+        <TouchableOpacity activeOpacity={0.7}>
+          <View style={[styles.avatar, theme.circles]}>
+            <Image source={require("../../../assets/img/avatar.png")} style={{ height: "100%", width: "100%", alignSelf: "center" }} />
+          </View>
         </TouchableOpacity>
         <View style={styles.text}>
-          <Text style={[{fontSize: 11, color:"rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy-Medium"}, theme.topText]}>Hello</Text>
-          <Text style={[{fontSize: 13, fontFamily: "Gilroy"}, theme.bottomText]}>Nick Korzh</Text>
+          <Text style={[{ fontSize: vw(2.9), color: "rgba(255, 255, 255, 0.4)", fontFamily: "Gilroy-Medium" }, theme.topText]}>Hello</Text>
+          <Text style={[{ fontSize: vw(3.5), fontFamily: "Gilroy" }, theme.bottomText]}>Nick Korzh</Text>
         </View>
       </View>
       <View style={styles.right}>
@@ -31,24 +31,24 @@ const Header = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: vh(4.9),
-    marginLeft: "8%",
-    marginRight: "8%",
-    marginBottom: vh(3.7),
+    marginTop: vh(2),
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
+    marginBottom: vh(4),
     alignItems: "center",
-    flex: 1,
+    height: vh(5.54),
     flexDirection: "row",
     justifyContent: "space-between"
   },
   avatar: {
-    height: 55,
-    width: 55,
+    height: vw(10.9),
+    width: vw(10.9),
     borderRadius: 27.5,
   },
   left: {
     flexDirection: "row"
   },
-  text:{
+  text: {
     marginLeft: vw(2.7),
     alignSelf: "center"
   },

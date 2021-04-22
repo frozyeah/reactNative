@@ -1,14 +1,9 @@
 import { getData } from "./asyncStorage";
-import { useColorScheme } from 'react-native-appearance';
 
-const checkTheme = async (): Promise<boolean> => {
+const checkTheme = async (): Promise<boolean | undefined> => {
   let scheme = await getData("@theme");
-  let theme: boolean;
-
-  if (scheme === undefined) theme = (useColorScheme() === 'dark');
-  else theme = (scheme === 'true')
-
-  return theme;
+  if (scheme === undefined) return scheme;
+  else return (scheme === 'true')
 }
 
 export default checkTheme;

@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Text, FlatList, TouchableOpacity } from 'react
 import SubHeader from '../SubHeader';
 import { getMode } from "../../../redux/actions";
 import { useSelector } from 'react-redux';
+import { vh, vw } from 'react-native-expo-viewport-units';
 
 const DATA = [
   {
@@ -34,15 +35,15 @@ const DATA = [
 const Item = (item: any, theme: boolean) => (
   <TouchableOpacity activeOpacity={0.7} style={[styles.element, { backgroundColor: theme ? "black" : "white", borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
     <View style={{ flexDirection: "column" }}>
-      <Text style={{ color: theme ? "white" : "black", fontSize: 18, fontFamily: "Gilroy-Medium" }}>
+      <Text style={{ color: theme ? "white" : "black", fontSize: vw(4.8), fontFamily: "Gilroy-Medium" }}>
         {item.title}
       </Text>
-      <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: 12, fontFamily: "Gilroy-Medium" }}>
+      <Text style={{ color: theme ? "rgba(255,255,255,0.5)" : "rgba(0, 0, 0, 0.4)", fontSize: vw(3.2), fontFamily: "Gilroy-Medium" }}>
         {item.bottomText}
       </Text>
     </View>
     <View style={{ justifyContent: "flex-end", alignSelf: "center" }}>
-      <Text style={{ color: "#4492EE", fontSize: 24, fontFamily: "Gilroy-Medium" }}>
+      <Text style={{ color: "#4492EE", fontSize: vw(6.4), fontFamily: "Gilroy-Medium" }}>
         {item.percents}
       </Text>
     </View>
@@ -55,16 +56,16 @@ const ManageVacuum = (props: any) => {
   return (
     <View style={[styles.container, { backgroundColor: theme ? "black" : "white" }]}>
       <SubHeader theme={theme} nav={props.navigation} />
-      <View style={{ flex: 8.7, justifyContent: "flex-start" }}>
+      <View style={{ justifyContent: "flex-start" }}>
         <View style={[styles.head, { borderColor: theme ? "#4F4F4F" : "rgba(0, 0, 0, 0.2)" }]}>
-          <Text style={{ fontSize: 18, color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ fontSize: vw(4.8), color: theme ? "white" : "black", fontFamily: "Gilroy-Medium" }}>
             Управление роботом-пылесосом
           </Text>
         </View>
-        <View style={{ alignItems: "flex-start", flex: 5 }}>
-          <Image source={require("../../../../assets/img/vacuum-print.png")} style={{ width: 328, height: 234, alignSelf: "center" }} />
+        <View style={{ alignItems: "flex-start" }}>
+          <Image source={require("../../../../assets/img/vacuum-print.png")} style={{ width: vw(87.47), height: vw(62.4), alignSelf: "center" }} />
         </View>
-        <View style={{ alignSelf: "flex-start", flex: 7 }}>
+        <View style={{ alignSelf: "flex-start" }}>
           <FlatList
             data={DATA}
             renderItem={({ item }) => Item(item, theme)}
@@ -86,11 +87,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     width: "100%",
     flexDirection: "row",
-    paddingHorizontal: "4%",
-    paddingVertical: "2.3%"
+    paddingHorizontal: vw(3.5),
+    paddingVertical: vw(2.67)
   },
   head: {
-    flex: 1,
+    paddingBottom: vw(4.8),
     alignItems: "center",
     borderBottomWidth: 0.5,
     width: "100%"

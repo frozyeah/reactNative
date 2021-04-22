@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Button, FlatList } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
-// import DatePicker from 'react-native-date-picker'
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-import { DatePicker } from '@davidgovea/react-native-wheel-datepicker';
+import moment from 'moment';
+import { TimePicker } from 'react-native-wheel-picker-android'
 
 import ArrowNight from "../../../assets/svg/night/dropdown-arrow.svg";
 import ArrowDay from "../../../assets/svg/day/dropdown-arrow.svg";
@@ -20,6 +18,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPlans } from "../../redux/actions";
 import { vh, vw } from 'react-native-expo-viewport-units';
 
+const mins = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'];
 
 const DATA = [
   {
@@ -64,21 +63,17 @@ const CreatePlan = (props: any) => {
   const dispatch = useDispatch();
   const dataState = useSelector(getPlans);
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [initDate, setInit] = useState<any>('0');
+
   const [date, setDate] = useState<any>();
-  const [dateWheel, setWheel] = useState<any>();
   const [checkList, setList] = useState<string[]>([]);
   const [mode, setMode] = useState<string>("Auto");
   const [power, setPower] = useState<string>("Silent");
 
   let theme = props.theme;
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
   const createObject = () => {
-    if (checkList !== [] && mode !== undefined && power !== undefined && date !== undefined) {
+    if (checkList.length !== 0 && mode !== undefined && power !== undefined && date !== undefined) {
       let daysList: string[] = [];
       DATA.filter(function (value) {
         if (checkList.includes(value.id)) {
@@ -172,20 +167,20 @@ const CreatePlan = (props: any) => {
     <View style={[styles.modalContainer, { backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
       <View style={styles.header}>
         <View style={{ flexDirection: "row" }}>
-          {theme.theme ? <PlannerModeNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay style={{ marginRight: "4%", alignSelf: "center" }} />}
-          <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy" }}>
+          {theme.theme ? <PlannerModeNight height={vw(5)} width={vw(5)} style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay height={vw(5)} width={vw(5)} style={{ marginRight: "4%", alignSelf: "center" }} />}
+          <Text style={{ fontSize: vw(4.8), color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
             Планирование уборки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} onPressOut={() => createObject()}>
           <View style={styles.close}>
-            {theme.theme ? <DoneNight width={17} height={17} /> : <DoneDay width={17} height={17} />}
+            {theme.theme ? <DoneNight width={vw(4)} height={vw(4)} /> : <DoneDay width={vw(4)} height={vw(4)} />}
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.element}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ color: theme.theme ? "white" : "black", fontSize: vw(4.8), fontFamily: "Gilroy-Medium" }}>
             Режим очистки
           </Text>
         </View>
@@ -208,44 +203,31 @@ const CreatePlan = (props: any) => {
           />
         </View>
       </View>
-      {/* <Button title="Show Time Picker" onPress={() => {
-        setDatePickerVisibility(true);
-      }} /> */}
-      {/* <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="time"
-        textColor="black"
-        isDarkModeEnabled={true}
-        onConfirm={(time: any) => {
-          console.log(time);
-          let hours = time.getHours();
-          let min = time.getMinutes();
-          if (min < 10) {
-            min = "0" + min;
-          }
-          hideDatePicker();
-          setDate({ hours: hours, min: min });
-        }}
-        onCancel={hideDatePicker}
-      /> */}
-      <DatePicker
-        mode="time"
-        use12Hours
-        style={{height:vh(20), backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)"}}
-        date={dateWheel}
-        minuteInterval={1}
-        onDateChange={(time) => { 
-          console.log(time);
-          let hours = time.getHours().toString();
-          let min: any = time.getMinutes();
-          if (min < 10) {
-            min = "0" + min.toString();
-          }
-          hideDatePicker();
-          setDate({ hours: hours, min: min });
-        }} />
-      <View style={{}}>
-        <Text style={{ fontFamily: "Gilroy-Medium", color: theme.theme ? "white" : "black", fontSize: 19, paddingHorizontal: "7%", paddingTop: "6%" }}>
+      <View style={{ marginTop: "4.5%", marginBottom: "0.5%" }}>
+        <TimePicker
+          hideIndicator={true}
+          minutes={mins}
+          format24={false}
+          // @ts-ignore
+          initDate={initDate}
+          selectedItemTextSize={vw(4.8)}
+          selectedItemTextFontFamily={"Gilroy-Medium"}
+          itemTextColor={theme.theme ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)"}
+          itemTextSize={vw(4.8)}
+          itemTextFontFamily={"Gilroy-Medium"}
+          selectedItemTextColor={theme.theme ? "white" : "black"}
+          onTimeSelected={(time) => {
+            let hours = time.getHours().toString();
+            let min: any = time.getMinutes();
+            if (min < 10) {
+              min = "0" + min.toString();
+            }
+            setDate({ hours: hours, min: min });
+            setInit(time);
+          }} />
+      </View>
+      <View style={{ borderTopWidth: 0.5, borderColor: "rgba(0, 0, 0, 0.2)" }}>
+        <Text style={{ fontFamily: "Gilroy-Medium", color: theme.theme ? "white" : "black", fontSize: vw(4.8), paddingHorizontal: "7%", paddingTop: "6%" }}>
           День повторения
         </Text>
         <View style={styles.checkContainer}>
@@ -262,7 +244,7 @@ const CreatePlan = (props: any) => {
       </View>
       <View style={styles.element}>
         <View style={{ flexDirection: "column" }}>
-          <Text style={{ color: theme.theme ? "white" : "black", fontSize: 20, fontFamily: "Gilroy-Medium" }}>
+          <Text style={{ color: theme.theme ? "white" : "black", fontSize: vw(4.8), fontFamily: "Gilroy-Medium" }}>
             Мощность
           </Text>
         </View>
@@ -294,8 +276,8 @@ const CreatePlan = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: "5%",
     backgroundColor: "#252525",
     flex: 1,
@@ -310,15 +292,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: "3%",
     paddingHorizontal: "7%",
-    paddingVertical: "5%"
+    paddingVertical: vh(2.22)
   },
   check: {
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: "1.5%",
-    borderRadius: 16,
-    width: 32,
-    height: 32
+    borderRadius: vw(4.135),
+    width: vw(8.27),
+    height: vw(8.27)
   },
   checkContainer: {
     flexDirection: "row",
@@ -374,8 +356,8 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     height: "80.6%",
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: "5%",
     borderRadius: 20,
     justifyContent: "flex-start"
@@ -404,7 +386,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: "2%",
     color: "white",
-    fontSize: 21.96,
+    fontSize: vw(4.8),
     fontFamily: "Gilroy-Medium"
   }
 });

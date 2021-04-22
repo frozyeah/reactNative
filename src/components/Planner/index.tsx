@@ -45,7 +45,7 @@ const Planner = (props: any) => {
     <View style={[styles.container, theme.back]}>
       <View style={styles.content}>
         <View style={styles.head}>
-          {theme.theme ? <PlannerModeNight /> : <PlannerModeDay />}
+          {theme.theme ? <PlannerModeNight height={vw(5)} width={vw(5)} /> : <PlannerModeDay height={vw(5)} width={vw(5)} />}
           <Text style={[styles.text, theme.text]}>
             Планирование уборки
           </Text>
@@ -72,12 +72,12 @@ const Planner = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: vh(2.3),
     justifyContent: "center",
-    flex: 1,
-    borderRadius: 20
+    height: vh(7.88),
+    borderRadius: vh(2.4)
   },
   element: {
     borderBottomWidth: 0.5,
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: "4%",
-    fontSize: 18,
+    fontSize: vw(4.8),
     fontFamily: "Gilroy-Medium"
   }
 });

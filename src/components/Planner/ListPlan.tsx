@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Animated, ActivityIndicator, FlatList, Dimensions } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 import { getData, storeData } from "../../actions/asyncStorage";
 
@@ -16,81 +17,6 @@ import { SwipeRow } from 'react-native-swipe-list-view';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPlans } from "../../redux/actions";
 
-const DATA = [
-  {
-    id: "1",
-    hour: "9",
-    min: "00",
-    mode: "Auto",
-    days: "будние дни",
-    power: "standart",
-    isEnabled: true
-  },
-  {
-    id: "2",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: false
-  },
-  {
-    id: "3",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: true
-  },
-  {
-    id: "4",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: true
-  },
-  {
-    id: "5",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: false
-  },
-  {
-    id: "6",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: true
-  },
-  {
-    id: "7",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: false
-  },
-  {
-    id: "8",
-    hour: "13",
-    min: "00",
-    mode: "Random",
-    days: "пт-сб-вс",
-    power: "turbo",
-    isEnabled: true
-  },
-]
-// onPress={() => onPress(item)}
 
 const Item = ({ item, onPress, theme }: any) => (
   <TouchableOpacity activeOpacity={1} style={[styles.element, { backgroundColor: theme ? "#4F4F4F" : "rgba(242, 242, 242, 1)" }]}>
@@ -189,14 +115,14 @@ const ListPlan = (props: any) => {
     <View style={[styles.modalContainer, { backgroundColor: theme.theme ? "rgba(79, 79, 79, 1)" : "rgba(242, 242, 242, 1)" }]}>
       <View style={styles.header}>
         <View style={{ flexDirection: "row" }}>
-          {theme.theme ? <PlannerModeNight style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay style={{ marginRight: "4%", alignSelf: "center" }} />}
-          <Text style={{ fontSize: 21.96, color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
+          {theme.theme ? <PlannerModeNight height={vw(5)} width={vw(5)} style={{ marginRight: "4%", alignSelf: "center" }} /> : <PlannerModeDay height={vw(5)} width={vw(5)} style={{ marginRight: "4%", alignSelf: "center" }} />}
+          <Text style={{ fontSize: vw(4.8), color: theme.theme ? "white" : "black", alignSelf: "center", justifyContent: "flex-start", fontFamily: "Gilroy-Medium" }}>
             Планирование уборки
           </Text>
         </View>
         <TouchableOpacity activeOpacity={0.7} onPressOut={props.closeModal}>
           <View style={styles.close}>
-            {theme.theme ? <CloseNight width={17} height={17} /> : <CloseDay width={17} height={17} />}
+            {theme.theme ? <CloseNight width={vw(3.47)} height={vw(3.47)} /> : <CloseDay width={vw(3.47)} height={vw(3.47)} />}
           </View>
         </TouchableOpacity>
       </View>
@@ -219,8 +145,8 @@ const ListPlan = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     justifyContent: "center",
     flex: 1,
     borderRadius: 20
@@ -272,10 +198,10 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     height: "80.6%",
-    marginLeft: "8%",
-    marginRight: "8%",
+    marginLeft: vw(8.3),
+    marginRight: vw(8.3),
     marginBottom: "5%",
-    borderRadius: 20,
+    borderRadius: vw(5.34),
     justifyContent: "flex-start"
   },
   open: {
